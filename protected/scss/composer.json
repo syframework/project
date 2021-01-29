@@ -1,0 +1,14 @@
+{
+	"name": "project/scss",
+	"description": "Project scss",
+	"require": {
+		"twbs/bootstrap": "^5.0.0-beta1",
+		"thomaspark/bootswatch": "^4.0"
+	},
+	"authors": [
+		{
+			"name": "Syone",
+			"email": "syone7@gmail.com"
+		}
+	]
+}

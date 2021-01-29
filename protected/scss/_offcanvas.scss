@@ -1,0 +1,44 @@
+@media screen and (max-width: map-get($grid-breakpoints, 'md')) {
+	.offcanvas-container.active {
+		&:before {
+			content: "";
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			z-index: $zindex-modal-backdrop;
+			background: rgba(0,0,0,.5);
+		}
+
+		.offcanvas-left {
+			left: 0;
+		}
+
+		.offcanvas-right {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			width: 20%;
+			z-index: $zindex-modal;
+		}
+	}
+
+	.offcanvas-left {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		width: 80%;
+		padding: 10px;
+		background-color: $body-bg;
+		left: -80%;
+		z-index: $zindex-modal;
+		overflow-x: hidden;
+		overflow-y: auto;
+		box-shadow: 4px 0 2px 0 rgba(0,0,0,.15);
+		-webkit-transition: all .25s ease-out;
+		-moz-transition: all .25s ease-out;
+		transition: all .25s ease-out;
+	}
+}

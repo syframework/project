@@ -1,0 +1,71 @@
+// @import "vendor/thomaspark/bootswatch/dist/flatly/variables";
+@import "variables";
+@import "vendor/twbs/bootstrap/scss/bootstrap";
+// @import "vendor/thomaspark/bootswatch/dist/flatly/bootswatch";
+
+@import "flash-message";
+@import "offcanvas";
+
+// Logo
+$logo-height: $nav-link-height;
+
+body {
+	padding-top: $logo-height + $navbar-padding-y * 2;
+	overflow-x: hidden;
+}
+
+// Navbar
+.navbar-brand {
+	padding-top: 0;
+	padding-bottom: 0;
+	svg {
+		height: $logo-height;
+	}
+}
+
+.navbar {
+	// Avatar
+	[data-bs-toggle="dropdown"] {
+		img {
+			width: 25px;
+			height: 25px;
+			vertical-align: bottom;
+		}
+	}
+}
+
+// Modal
+.modal-xl {
+	width: auto !important;
+	max-width: 100%;
+	margin: 10px !important;
+}
+
+// Button
+.btn-circle {
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	padding: 0;
+
+	svg {
+		vertical-align: -2px;
+	}
+}
+
+// Back to top button
+#top-btn {
+	position: fixed;
+	right: 10px;
+	bottom: -100px;
+	transition: all ease-in-out 0.7s;
+	z-index: 1050;
+}
+
+// Sy debug toolbar
+#sy-page-toolbar {
+	position: fixed;
+	left: 10px;
+	bottom: 50px;
+	z-index: 1050;
+}
