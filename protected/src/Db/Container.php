@@ -2,7 +2,7 @@
 namespace Project\Db;
 
 /**
- * @method DbContainer getInstance()
+ * @method static Container getInstance()
  */
 class Container extends \Sy\Bootstrap\Db\Container {
 

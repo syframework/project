@@ -2,7 +2,7 @@
 namespace Project\Service;
 
 /**
- * @method ServiceContainer getInstance()
+ * @method static Container getInstance()
  */
 class Container extends \Sy\Bootstrap\Service\Container {
 

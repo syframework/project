@@ -53,6 +53,7 @@ define('CONTROLLER_TRIGGER', 'p');
 // http://my.domain.com/index.php?p=home&a=index
 //------------------------------------------------------------------------------
 define('ACTION_TRIGGER', 'a');
+define('ACTION_PARAM', ACTION_TRIGGER . '_param');
 
 // Cache directory
 define('CACHE_DIR', '/tmp/' . basename(realpath(__DIR__ . '/../../')));
@@ -71,7 +72,7 @@ define('URL_REWRITING', 1);
 
 // Default lang & lang authorized
 define('LANG', 'fr');
-define('LANGS', ['fr' => 'Fran&ccedil;ais']);
+define('LANGS', ['fr' => 'Fran&ccedil;ais', 'en' => 'English']);
 
 // GeoLite2
 //define('GEOLITE2_CITY'   , __DIR__ . '/../geolite2/GeoLite2-City.mmdb');
@@ -81,7 +82,7 @@ define('LANGS', ['fr' => 'Fran&ccedil;ais']);
 define('SALT', PROJECT);
 
 // CDN urls
-define('CKEDITOR_JS'          , 'https://cdn.ckeditor.com/4.15.1/full-all/ckeditor.js');
+define('CKEDITOR_JS'          , 'https://cdn.ckeditor.com/4.16.0/full-all/ckeditor.js');
 define('CKEDITOR_ROOT'        , WEB_ROOT . '/assets/ckeditor');
 define('MOMENT_JS'            , 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js');
 //define('JQUERY_JS'            , ['url' => 'https://code.jquery.com/jquery-3.5.1.min.js', 'integrity' => 'sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=']);
