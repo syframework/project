@@ -10,9 +10,9 @@ CREATE TABLE `t_page` (
   `title` varchar(128) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'none',
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'none',
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'none',
   PRIMARY KEY (`id`,`lang`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of t_page
@@ -49,7 +49,7 @@ CREATE TABLE `t_page_history` (
   KEY `t_page_history_ibfk_1` (`user_id`) USING BTREE,
   CONSTRAINT `t_page_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `t_page_history_ibfk_2` FOREIGN KEY (`page_id`, `page_lang`) REFERENCES `t_page` (`id`, `lang`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -73,7 +73,7 @@ CREATE TABLE `t_user` (
   UNIQUE KEY `email` (`email`) USING BTREE,
   KEY `role` (`role`) USING BTREE,
   CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`role`) REFERENCES `t_user_role` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Table structure for t_user_has_permission
@@ -86,7 +86,7 @@ CREATE TABLE `t_user_has_permission` (
   KEY `permission` (`permission`) USING BTREE,
   CONSTRAINT `t_user_has_permission_ibfk_1` FOREIGN KEY (`id`) REFERENCES `t_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_user_has_permission_ibfk_2` FOREIGN KEY (`permission`) REFERENCES `t_user_permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Table structure for t_user_permission
@@ -96,7 +96,7 @@ CREATE TABLE `t_user_permission` (
   `id` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of t_user_permission
@@ -117,7 +117,7 @@ CREATE TABLE `t_user_role` (
   `id` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of t_user_role
@@ -139,7 +139,7 @@ CREATE TABLE `t_user_role_has_permission` (
   KEY `fk_t_user_role_has_t_user_permission_t_user_permission1` (`id_permission`) USING BTREE,
   CONSTRAINT `t_user_role_has_permission_ibfk_1` FOREIGN KEY (`id_permission`) REFERENCES `t_user_permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `t_user_role_has_permission_ibfk_2` FOREIGN KEY (`id_role`) REFERENCES `t_user_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of t_user_role_has_permission
@@ -162,6 +162,6 @@ CREATE TABLE `t_user_setting` (
   `value` varchar(32) NOT NULL,
   PRIMARY KEY (`user_id`,`key`),
   CONSTRAINT `t_user_setting_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 SET FOREIGN_KEY_CHECKS=1;
