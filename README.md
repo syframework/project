@@ -1,6 +1,6 @@
 # sy/project
 
-A skeleton to start a new website
+A skeleton to start a new website. Build with [sy/bootstrap](https://github.com/syframework/bootstrap)
 
 ## Installation
 
