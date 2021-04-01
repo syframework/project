@@ -98,7 +98,7 @@ define('INTLTELINPUT_JS'      , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel
 define('INTLTELINPUT_UTILS_JS', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.5/js/utils.min.js');
 define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.5/css/intlTelInput.min.css');
 define('MAILCHECK_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js');
-define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js');
+define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js');
 define('PRINT_JS'             , 'https://cdnjs.cloudflare.com/ajax/libs/printThis/1.12.1/printThis.min.js');
 define('SLIP_JS'              , 'https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js');
 define('CROPPER_JS'           , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.4.3/cropper.min.js');

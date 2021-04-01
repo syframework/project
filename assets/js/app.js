@@ -37,19 +37,14 @@
 	});
 
 	// Tooltips
-	/*var tooltip = new bootstrap.Tooltip(document.body, {
+	new bootstrap.Tooltip(document.body, {
 		selector: '[data-bs-title]'
 	});
 
-	$('body').on('touchend', function() {
-		console.log('touchend');
+	$('body').on('click touchend', 'button[data-bs-title]', function(e) {
+		var tooltip = bootstrap.Tooltip.getInstance(this);
 		tooltip.dispose();
 	});
-
-	$('body').on('click', 'button[data-bs-title]', function() {
-		console.log('click');
-		tooltip.dispose();
-	});*/
 
 	// Multi modal
 	$('.modal').on('hidden.bs.modal', function() {
