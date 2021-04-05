@@ -88,15 +88,13 @@ define('MOMENT_JS'            , 'https://cdnjs.cloudflare.com/ajax/libs/moment.j
 //define('JQUERY_JS'            , ['url' => 'https://code.jquery.com/jquery-3.5.1.min.js', 'integrity' => 'sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=']);
 define('JQUERY_UI_JS'         , ['url' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', 'integrity' => 'sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=']);
 define('JQUERY_UI_TOUCH_JS'   , 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js');
-define('BOOTSTRAP_JS'         , ['url' => 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js', 'integrity' => 'sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf']);
-//define('FONT_AWESOME_JS'      , 'https://kit.fontawesome.com/46dfbe3891.js');
 //define('SCROLL_JS'            , 'https://cdnjs.cloudflare.com/ajax/libs/iamdustan-smoothscroll/0.4.0/smoothscroll.min.js');
 define('STICKYFILL_JS'        , 'https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.0.2/stickyfill.min.js');
 define('INSTAFEED_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js');
 //define('AUTOSIZE_JS'          , 'https://cdnjs.cloudflare.com/ajax/libs/autosize.js/4.0.2/autosize.min.js');
-define('INTLTELINPUT_JS'      , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.5/js/intlTelInput.min.js');
-define('INTLTELINPUT_UTILS_JS', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.5/js/utils.min.js');
-define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.5/css/intlTelInput.min.css');
+define('INTLTELINPUT_JS'      , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js');
+define('INTLTELINPUT_UTILS_JS', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.min.js');
+define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.min.css');
 define('MAILCHECK_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js');
 define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js');
 define('PRINT_JS'             , 'https://cdnjs.cloudflare.com/ajax/libs/printThis/1.12.1/printThis.min.js');
