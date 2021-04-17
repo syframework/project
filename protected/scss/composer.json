@@ -2,7 +2,7 @@
 	"name": "project/scss",
 	"description": "Project scss",
 	"require": {
-		"twbs/bootstrap": "^5.0.0-beta1",
+		"twbs/bootstrap": "^5.0.0-beta3",
 		"thomaspark/bootswatch": "^4.0"
 	},
 	"authors": [
