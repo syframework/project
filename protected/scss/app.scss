@@ -1,10 +1,7 @@
-// @import "vendor/thomaspark/bootswatch/dist/flatly/variables";
 @import "variables";
-@import "vendor/twbs/bootstrap/scss/bootstrap";
-// @import "vendor/thomaspark/bootswatch/dist/flatly/bootswatch";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 @import "flash-message";
-@import "social-buttons";
 @import "utilities";
 @import "toolbar";
 

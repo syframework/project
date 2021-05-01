@@ -32,16 +32,16 @@ function js () {
 // Watch
 function watch () {
 	// Watch scss files
-	gulp.watch('protected/scss/**/*.scss', ['css']);
+	gulp.watch('protected/scss/**/*.scss', css);
 
 	// Watch js file
-	gulp.watch('assets/js/app.js', ['js']);
+	gulp.watch('assets/js/app.js', js);
 };
 
 // Public task
 exports.css   = css;
 exports.js    = js;
-exports.watch = js;
+exports.watch = watch;
 
 // Default Task
 exports.default = gulp.series(css, js, watch);
