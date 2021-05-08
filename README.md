@@ -44,3 +44,20 @@ encryption = tls
 3. Create tables
 
 Use the database installation script: ```protected/sql/install.sql```
+
+## Build CSS & JS
+
+Go to the project folder and install project dependencies
+```
+npm install
+```
+
+To build css (```protected/scss/app.scss``` -> ```assets/css/app.css```):
+```
+gulp css
+```
+
+To build js (```protected/js/app.css``` -> ```assets/js/app.js```):
+```
+gulp js
+```
