@@ -1,9 +1,10 @@
-@import "variables";
-
 // Note: Replace [theme] (examples: darkly, slate, cosmo, spacelab, and superhero. See https://bootswatch.com for current theme names.)
 // @import "../../node_modules/bootswatch/dist/[theme]/variables";
+// @import "variables";
+// @import "../../node_modules/bootstrap/scss/bootstrap";
 // @import "../../node_modules/bootswatch/dist/[theme]/bootswatch";
 @import "../../node_modules/bootswatch/dist/flatly/variables";
+@import "variables";
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/bootswatch/dist/flatly/bootswatch";
 
