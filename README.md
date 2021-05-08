@@ -57,7 +57,7 @@ To build css (```protected/scss/app.scss``` -> ```assets/css/app.css```):
 gulp css
 ```
 
-To build js (```protected/js/app.css``` -> ```assets/js/app.js```):
+To build js (```protected/js/app.js``` -> ```assets/js/app.js```):
 ```
 gulp js
 ```
