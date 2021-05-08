@@ -25,8 +25,8 @@ function js () {
 		'./node_modules/@fortawesome/fontawesome-free/js/all.min.js',
 		'./node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js',
 		'./node_modules/autosize/dist/autosize.min.js',
-		'./assets/js/app.js'
-	]).pipe(concat('app.min.js')).pipe(sourcemaps.init()).pipe(uglify()).pipe(sourcemaps.write('.')).pipe(gulp.dest('./assets/js'))
+		'./protected/js/**/*.js'
+	]).pipe(concat('app.js')).pipe(sourcemaps.init()).pipe(uglify()).pipe(sourcemaps.write('.')).pipe(gulp.dest('./assets/js'))
 };
 
 // Watch
@@ -35,7 +35,7 @@ function watch () {
 	gulp.watch('protected/scss/**/*.scss', css);
 
 	// Watch js file
-	gulp.watch('assets/js/app.js', js);
+	gulp.watch('protected/js/**/*.js', js);
 };
 
 // Public task
