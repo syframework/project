@@ -1,5 +1,5 @@
 CKEDITOR.addTemplates('websyte', {
-	imagesPath: 'https://eater.space/assets/ckeditor/',
+	imagesPath: '/assets/ckeditor/',
 	templates: [
 		{
 			title: 'Jumbotron',

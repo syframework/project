@@ -1,10 +1,16 @@
-// @import "vendor/thomaspark/bootswatch/dist/flatly/variables";
+// Note: Replace [theme] (examples: darkly, slate, cosmo, spacelab, and superhero. See https://bootswatch.com for current theme names.)
+// @import "../../node_modules/bootswatch/dist/[theme]/variables";
+// @import "variables";
+// @import "../../node_modules/bootstrap/scss/bootstrap";
+// @import "../../node_modules/bootswatch/dist/[theme]/bootswatch";
+@import "../../node_modules/bootswatch/dist/flatly/variables";
 @import "variables";
-@import "vendor/twbs/bootstrap/scss/bootstrap";
-// @import "vendor/thomaspark/bootswatch/dist/flatly/bootswatch";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootswatch/dist/flatly/bootswatch";
 
 @import "flash-message";
-@import "offcanvas";
+@import "utilities";
+@import "toolbar";
 
 // Logo
 $logo-height: $nav-link-height;
@@ -34,38 +40,11 @@ body {
 	}
 }
 
-// Modal
-.modal-xl {
-	width: auto !important;
-	max-width: 100%;
-	margin: 10px !important;
-}
-
-// Button
-.btn-circle {
-	width: 38px;
-	height: 38px;
-	border-radius: 50%;
-	padding: 0;
-
-	svg {
-		vertical-align: -2px;
-	}
-}
-
 // Back to top button
 #top-btn {
 	position: fixed;
 	right: 10px;
 	bottom: -100px;
 	transition: all ease-in-out 0.7s;
-	z-index: 1050;
-}
-
-// Sy debug toolbar
-#sy-page-toolbar {
-	position: fixed;
-	left: 10px;
-	bottom: 50px;
 	z-index: 1050;
 }

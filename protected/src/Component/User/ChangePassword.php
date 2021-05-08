@@ -54,7 +54,7 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 	public function oldPasswordValidator($value, $element) {
 		$service = \Sy\Bootstrap\Service\Container::getInstance();
 		$user = $service->user->getCurrentUser();
-		if ($service->user->passwordVerify($value, $user->password, $user->algo)) return true;
+		if ($service->user->passwordVerify($value, $user->password)) return true;
 		$element->setError('Password error');
 		return false;
 	}

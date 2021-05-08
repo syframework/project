@@ -16,7 +16,7 @@ class Application extends \Sy\Bootstrap\Application {
 		$this->addCssLink(WEB_ROOT . '/assets/css/app.css');
 
 		// Application js
-		$this->addJsLink(WEB_ROOT . '/assets/js/app.min.js');
+		$this->addJsLink(WEB_ROOT . '/assets/js/app.js');
 	}
 
 	protected function preInit() {
