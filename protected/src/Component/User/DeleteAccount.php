@@ -13,6 +13,7 @@ class DeleteAccount extends \Sy\Bootstrap\Component\Form {
 			[
 				'name'     => 'password',
 				'required' => 'required',
+				'autocomplete' => 'off',
 			],
 			[
 				'label'     => 'Password',
