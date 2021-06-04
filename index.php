@@ -12,6 +12,7 @@ if ($env === 'dev') {
 	$debugger->enableFileLog(__DIR__ . '/protected/log/app.log');
 	$debugger->enableTagLog(__DIR__ . '/protected/log');
 	$debugger->enableQueryLog();
+	opcache_reset();
 }
 
 $app = new Project\Application();

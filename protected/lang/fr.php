@@ -121,6 +121,11 @@ return [
 	'Address' => 'Adresse',
 	'An update for this app is available' => 'Une mise &agrave; jour est disponible',
 
+	// Picture
+	'Selected file is not an image' => "Le fichier s&eacute;lectionn&eacute; n'est pas une image",
+	'Picture is too small' => "L'image est trop petite",
+	'Maximum picture reached' => "Le nombre max d'image a &eacute;t&eacute; atteint",
+
 	// Account
 	'Account created successfully' => "Vous allez recevoir un mail pour activer votre compte, il se peut que le mail arrive en SPAM",
 	'Account' => 'Mon compte',
