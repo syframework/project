@@ -9,18 +9,18 @@
 // Modal
 .modal-xl {
 	width: auto !important;
-	max-width: 100%;
+	max-width: 100% !important;
 	margin: 10px !important;
 }
 
 // Button
 .btn-circle {
-	width: 38px;
-	height: 38px;
-	border-radius: 50%;
-	padding: 0;
+	width: 38px !important;
+	height: 38px !important;
+	border-radius: 50% !important;
+	padding: 0 !important;
 
 	svg {
-		vertical-align: -2px;
+		vertical-align: -2px !important;
 	}
 }
