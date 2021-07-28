@@ -3,7 +3,7 @@ var sourcemaps = require('gulp-sourcemaps');
 
 // Compile & minify css
 function css () {
-	var sass = require('gulp-sass');
+	var sass = require('gulp-sass')(require('sass'));
 	var postcss = require('gulp-postcss');
 	var autoprefixer = require('autoprefixer');
 
