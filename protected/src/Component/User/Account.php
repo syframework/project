@@ -21,15 +21,7 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				'maxlength' => 64,
 				'readonly'  => 'readonly'
 			], [
-				'label' => $this->_('E-mail'),
-				'validator' => [
-					'\Sy\Component\Html\Form\email',
-					function($value) {
-						if (strlen($value) <= 64) return true;
-						$this->setError($this->_('E-mail is too long'));
-						return false;
-					}
-				]
+				'label' => 'E-mail',
 			], $f
 		);
 
@@ -38,16 +30,9 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				'name'      => 'firstname',
 				'value'     => $user->firstname,
 				'required'  => 'required',
-			    'maxlength' => 64
+				'maxlength' => 64
 			], [
-				'label' => $this->_('Firstname'),
-				'validator' => [
-					function($value) {
-						if (strlen($value) <= 64) return true;
-						$this->setError($this->_('Firstname is too long'));
-						return false;
-					}
-				]
+				'label' => 'Firstname',
 			], $f
 		);
 
@@ -55,16 +40,9 @@ class Account extends \Sy\Bootstrap\Component\Form {
 		$this->addTextInput([
 				'name'      => 'lastname',
 				'value'     => $user->lastname,
-			    'maxlength' => 64
+				'maxlength' => 64
 			], [
-				'label' => $this->_('Lastname'),
-				'validator' => [
-					function($value) {
-						if (strlen($value) <= 64) return true;
-						$this->setError($this->_('Lastname is too long'));
-						return false;
-					}
-				]
+				'label' => 'Lastname',
 			], $f
 		);
 
@@ -73,14 +51,7 @@ class Account extends \Sy\Bootstrap\Component\Form {
 			'name'      => 'description',
 			'maxlength' => 500
 		], [
-			'label' => ucfirst($this->_('description')),
-			'validator' => [
-				function($value) {
-					if (strlen($value) <= 500) return true;
-					$this->setError(sprintf($this->_('%d characters max for %s'), 500, $this->_('description')));
-					return false;
-				}
-			]
+			'label' => 'Description',
 		], $f)->addText($user->description);
 
 		// Language
@@ -88,7 +59,7 @@ class Account extends \Sy\Bootstrap\Component\Form {
 			'name'     => 'language',
 			'required' => 'required'
 		], [
-			'label'    => $this->_('Language'),
+			'label'    => 'Language',
 			'options'  => LANGS,
 			'selected' => $user->language,
 			'validator' => [
@@ -97,14 +68,6 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				}
 			]
 		], $f);
-
-		// Newsletter opt in
-//		$this->addCheckbox([
-//			'name'  => 'newsletter',
-//			'value' => 'yes',
-//		], [
-//			'label' => 'I want to receive newsletter'
-//		], $f->addDiv(['class' => 'form-group']));
 
 		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'fas fa-save']);
 	}

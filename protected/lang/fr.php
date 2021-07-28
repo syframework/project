@@ -27,7 +27,7 @@ return [
 	'Published' => 'Publi&eacute;',
 	'Updated' => 'Mis &agrave; jour',
 	'Comments' => 'Commentaires',
-	'description' => 'description',
+	'Description' => 'Description',
 	'Visibility' => 'Visibilit&eacute;',
 	'Public' => 'Public',
 	'Private' => 'Priv&eacute;',
