@@ -64,7 +64,11 @@ class Account extends \Sy\Bootstrap\Component\Form {
 			'selected' => $user->language,
 			'validator' => [
 				function($value) {
-					return in_array($value, array_keys(LANGS));
+					$res = in_array($value, array_keys(LANGS));
+					if (!$res) {
+						$this->setError($this->_('Language error'));
+					}
+					return $res;
 				}
 			]
 		], $f);
