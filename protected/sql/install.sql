@@ -58,7 +58,7 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role` varchar(32) DEFAULT 'user',
-  `firstname` varchar(64) DEFAULT NULL,
+  `firstname` varchar(64) NOT NULL DEFAULT '',
   `lastname` varchar(64) NOT NULL DEFAULT '',
   `description` varchar(512) NOT NULL DEFAULT '',
   `email` varchar(128) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `t_user` (
   `last_connection_at` datetime DEFAULT NULL,
   `status` enum('inactive','active') NOT NULL DEFAULT 'inactive',
   `ip` int unsigned DEFAULT NULL,
-  `token` varchar(45) NOT NULL,
+  `token` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`) USING BTREE,
   KEY `role` (`role`) USING BTREE,
