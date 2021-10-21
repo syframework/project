@@ -55,6 +55,9 @@ define('CONTROLLER_TRIGGER', 'p');
 define('ACTION_TRIGGER', 'a');
 define('ACTION_PARAM', ACTION_TRIGGER . '_param');
 
+// Cache engine activation on Db\Crud
+define('DB_CRUD_CACHE', false);
+
 // Cache directory
 define('CACHE_DIR', '/tmp/' . basename(realpath(__DIR__ . '/../../')));
 
@@ -73,10 +76,6 @@ define('URL_REWRITING', 1);
 // Default lang & lang authorized
 define('LANG', 'fr');
 define('LANGS', ['fr' => 'Fran&ccedil;ais', 'en' => 'English']);
-
-// GeoLite2
-//define('GEOLITE2_CITY'   , __DIR__ . '/../geolite2/GeoLite2-City.mmdb');
-//define('GEOLITE2_COUNTRY', __DIR__ . '/../geolite2/GeoLite2-Country.mmdb');
 
 // Salt for hash id
 define('SALT', PROJECT);

@@ -95,11 +95,11 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				$this->setError($this->_('Please fill the form correctly'));
 			}
 			$this->fill($_POST);
-		} catch(\Sy\Bootstrap\Service\Crud\DuplicateEntryException $e) {
+		} catch(\Sy\Db\MySql\DuplicateEntryException $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('User already exists'));
 			$this->fill($_POST);
-		} catch(\Sy\Bootstrap\Service\Crud\Exception $e) {
+		} catch(\Sy\Db\MySql\Exception $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('An error occured'));
 		}
