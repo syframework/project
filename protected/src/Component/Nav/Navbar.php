@@ -25,7 +25,6 @@ class Navbar extends \Sy\Component\WebComponent {
 	private function menu() {
 		$data = [
 			'Home'     => ['fa' => 'home fa-fw', 'page' => 'home'],
-			'Articles' => ['fa' => 'newspaper fa-fw', 'page' => 'articles'],
 			'About' => [
 				'fa' => 'question-circle fa-fw',
 				'menu' => [
