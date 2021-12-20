@@ -181,6 +181,7 @@ return [
 	'Start editing' => "Commencer l'&eacute;dition",
 	'Finish editing' => "Terminer l'&eacute;dition",
 	'Delete page' => 'Supprimer la page',
+	'Source code' => 'Code source',
 	'Source code updated successfully' => 'Code source modifi&eacute;',
 	'Are you sure to delete this page?' => 'Etes vous s&ucirc;r de supprimer cette page ?',
 	'Page not found' => "La page que vous cherchez n'existe pas",
