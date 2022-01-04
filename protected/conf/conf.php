@@ -2,8 +2,14 @@
 // Project name
 define('PROJECT', 'Project');
 
+// Domain name
+define('DOMAIN', 'replace.me');
+
 // Project url
-define('PROJECT_URL', (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'https') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'syone.me'));
+define('PROJECT_URL', (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'https') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : DOMAIN));
+
+// Project version
+define('PROJECT_VERSION', '0.0.0');
 
 // Client path to project root directory starting at document root.
 define('WEB_ROOT', '');
@@ -68,7 +74,7 @@ define('DATABASE_CONFIG', parse_ini_file(__DIR__ . '/database.ini'));
 define('SMTP_CONFIG', parse_ini_file(__DIR__ . '/smtp.ini'));
 
 // Project team mail
-define('TEAM_MAIL', 'contact@syone.me');
+define('TEAM_MAIL', 'contact@' . DOMAIN);
 
 // Url rewriting
 define('URL_REWRITING', 1);
@@ -90,10 +96,19 @@ define('STICKYFILL_JS'        , 'https://cdnjs.cloudflare.com/ajax/libs/stickyfi
 define('INSTAFEED_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js');
 define('INTLTELINPUT_JS'      , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/intlTelInput.min.js');
 define('INTLTELINPUT_UTILS_JS', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/utils.min.js');
-define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/css/intlTelInput.min.css');
+define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/css/intlTelInput.css');
 define('MAILCHECK_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js');
 define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js');
 define('PRINT_JS'             , 'https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js');
 define('SLIP_JS'              , 'https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js');
 define('CROPPER_JS'           , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js');
 define('CROPPER_CSS'          , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css');
+
+// You can use these slot names (prefixed by underscore) in your templates, they are set in Sy\Bootstrap\Application\Page\Body
+define('MAGIC_VARS', [
+	'_PROJECT'         => PROJECT,
+	'_PROJECT_URL'     => PROJECT_URL,
+	'_PROJECT_VERSION' => PROJECT_VERSION,
+	'_WEB_ROOT'        => WEB_ROOT,
+	'_YEAR'            => date('Y'),
+]);
