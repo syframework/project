@@ -140,6 +140,7 @@ return [
 	'Sign Out' => 'Se d&eacute;connecter',
 	'Firstname' => 'Pr&eacute;nom',
 	'Lastname' => 'Nom',
+	'Phone' => 'T&eacute;l&eacute;phone',
 	'Password' => 'Mot de passe',
 	'Forget password' => "Mot de passe oubli&eacute; ?",
 	'Old password' => 'Mot de passe actuel',
