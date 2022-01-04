@@ -2,11 +2,11 @@
 // Project name
 define('PROJECT', 'Project');
 
-// Domain name
-define('DOMAIN', 'replace.me');
+// Project domain name
+define('PROJECT_DOMAIN', 'replace.me');
 
 // Project url
-define('PROJECT_URL', (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'https') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : DOMAIN));
+define('PROJECT_URL', (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCHEME'] : 'https') . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : PROJECT_DOMAIN));
 
 // Project version
 define('PROJECT_VERSION', '0.0.0');
@@ -74,7 +74,7 @@ define('DATABASE_CONFIG', parse_ini_file(__DIR__ . '/database.ini'));
 define('SMTP_CONFIG', parse_ini_file(__DIR__ . '/smtp.ini'));
 
 // Project team mail
-define('TEAM_MAIL', 'contact@' . DOMAIN);
+define('TEAM_MAIL', 'contact@' . PROJECT_DOMAIN);
 
 // Url rewriting
 define('URL_REWRITING', 1);
