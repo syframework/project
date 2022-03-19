@@ -11,9 +11,9 @@ class AccountPanel extends \Sy\Component\Html\Panel {
 
 	public function indexAction() {
 		$service = \Sy\Bootstrap\Service\Container::getInstance();
-		$id = $service->user->getCurrentUser()->id;
+		$email = $service->user->getCurrentUser()->email;
 		$this->setComponent('NORTH', new \Sy\Bootstrap\Component\Form\Avatar(
-			\Sy\Bootstrap\Lib\Url::avatar($id),
+			\Sy\Bootstrap\Lib\Url::avatar($email),
 			\Sy\Bootstrap\Lib\Url::build('api', 'avatar'),
 			100
 		));
