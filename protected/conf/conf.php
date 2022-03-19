@@ -11,6 +11,9 @@ define('PROJECT_URL', (isset($_SERVER['REQUEST_SCHEME']) ? $_SERVER['REQUEST_SCH
 // Project version
 define('PROJECT_VERSION', '0.0.0');
 
+// Project key for encryption where needed
+define('PROJECT_KEY', md5(PROJECT));
+
 // Client path to project root directory starting at document root.
 define('WEB_ROOT', '');
 
