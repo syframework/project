@@ -52,7 +52,7 @@ class Navbar extends \Sy\Component\WebComponent {
 
 			$name = htmlentities(trim($user->firstname . ' ' . $user->lastname), ENT_QUOTES, 'UTF-8');
 			$data = [
-				'<img class="rounded-circle" src="' . Url::avatar($user->id) . '" alt="' . $name . '" /> ' . $name => [
+				'<img class="rounded-circle" src="' . Url::avatar($user->email) . '" alt="' . $name . '" /> ' . $name => [
 					'page' => 'user',
 					'param' => ['id' => $user->id],
 					'class' => 'dropdown-menu-end',
