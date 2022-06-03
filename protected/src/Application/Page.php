@@ -26,6 +26,8 @@ class Page extends \Sy\Bootstrap\Application\Page {
 		// Application css
 		$this->addCssLink(WEB_ROOT . '/assets/css/app.css');
 
+		// Library js
+		$this->addJsLink(WEB_ROOT . '/assets/js/lib.js');
 		// Application js
 		$this->addJsLink(WEB_ROOT . '/assets/js/app.js');
 	}
