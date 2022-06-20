@@ -24,11 +24,11 @@ class Body extends \Sy\Bootstrap\Application\Page\Body {
 			$i = $nav->addItem($label, Url::build('page', 'user-account', array('s' => $id)), ['class' => "nav-link $active"]);
 			$i->setAttribute('class', 'nav-item');
 		}
-		$this->__call('user-account', ['CONTENT' => [
+		$this->setContentVars([
 			'TITLE'   => $sections[$this->get('s', 'index')],
 			'NAV'     => $nav,
 			'CONTENT' => new \Project\Component\User\AccountPanel(),
-		]]);
+		]);
 	}
 
 	/**
