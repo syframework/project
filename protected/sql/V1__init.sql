@@ -17,8 +17,6 @@ CREATE TABLE `t_page` (
 -- ----------------------------
 -- Records of t_page
 -- ----------------------------
-INSERT INTO `t_page` (id, lang, title) VALUES ('404', 'en', 'Page not found');
-INSERT INTO `t_page` (id, lang, title) VALUES ('404', 'fr', 'Page non trouvée');
 INSERT INTO `t_page` (id, lang, title) VALUES ('about-us', 'en', 'About us');
 INSERT INTO `t_page` (id, lang, title) VALUES ('about-us', 'fr', 'A propos de nous');
 INSERT INTO `t_page` (id, lang, title) VALUES ('home', 'en', 'Home');
