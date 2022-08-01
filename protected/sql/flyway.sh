@@ -15,4 +15,4 @@ source <(grep = $database_ini | sed 's/ *= */=/g')
 # Retrieve network name from the host
 network="network-$(echo $host | cut -d'-' -f 2)"
 
-docker run --network=$network --rm -v $DIR:/flyway/sql flyway/flyway -url=jdbc:mysql://$host:$port/$dbname -user=$username -password=$password -schemas="$dbname" $@
+docker run --network=$network --rm -v $DIR:/flyway/sql flyway/flyway -url=jdbc:mysql://$host:$port -user=$username -password=$password -schemas="$dbname" $@
