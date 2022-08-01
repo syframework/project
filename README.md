@@ -31,7 +31,7 @@ Example:
 
 ```
 host = smtp.gmail.com
-username = user@example.com 
+username = user@example.com
 password = mypassword
 port = 587
 encryption = tls
@@ -43,7 +43,12 @@ encryption = tls
 2. Create your user and give permissions
 3. Create tables
 
-Use the database installation script: ```protected/sql/install.sql```
+Use the database installation script: ```protected/sql/V1__init.sql```
+
+If you have Docker installed, you can use the helper script: ```protected/sql/flyway.sh```
+```
+./flyway.sh migrate
+```
 
 ## Build CSS & JS
 
