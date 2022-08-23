@@ -10,9 +10,6 @@ if [ ! -f "$database_ini" ]; then
 fi
 
 # Import database.ini variables
-source <(grep = $database_ini | sed 's/ *= */=/g')
+source <(grep = $database_ini | sed 's/ *= */=/g' | tr -d '\r')
 
-# Retrieve network name from the host
-network="network-$(echo $host | cut -d'-' -f 2)"
-
-docker run --network=$network --rm -v $DIR:/flyway/sql flyway/flyway -url=jdbc:mysql://$host:$port -user=$username -password=$password -schemas="$dbname" $@
+docker run --network container:$host --rm -v $DIR:/flyway/sql flyway/flyway -url=jdbc:mysql://$host:$port -user=$username -password=$password -schemas="$dbname" $@
