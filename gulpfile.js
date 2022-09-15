@@ -44,42 +44,44 @@ function cssAppTranspile() {
 		.pipe(gulp.dest('assets/css'));
 }
 
-// Transpile & minify: protected/templates/Application/Page/css/*.scss -> protected/templates/Application/Page/css/*.css
-function cssPageTranspile() {
-	return gulp.src('protected/templates/Application/Page/css/*.scss')
-		.pipe(sourcemaps.init())
+// Transpile & minify: protected/templates/**/*.scss -> protected/templates/**/*.css
+function cssTplTranspile() {
+	return gulp.src('protected/templates/**/*.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(postcss([autoprefixer()]))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('protected/templates/Application/Page/css'));
+		.pipe(gulp.dest('protected/templates'));
 }
 
-// Transpile & minify: protected/src/Component/**/*.scss -> protected/src/Component/**/*.css
-function cssComponentTranspile() {
-	return gulp.src('protected/src/Component/**/*.scss')
-		.pipe(sourcemaps.init())
+// Transpile & minify: protected/src/**/*.scss -> protected/src/**/*.css
+function cssSrcTranspile() {
+	return gulp.src('protected/src/**/*.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(postcss([autoprefixer()]))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('protected/src/Component'));
+		.pipe(gulp.dest('protected/src'));
 }
 
-// Watch
+// Watch scss & js files
 function watch () {
-	// Watch scss files
-	gulp.watch('protected/scss/**/*.scss', gulp.parallel(cssAppTranspile, cssComponentTranspile, cssPageTranspile));
+	// Watch scss files in scss folder
+	gulp.watch('protected/scss/**/*.scss', gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile));
+
+	// Watch scss files in templates folder
+	gulp.watch('protected/templates/**/*.scss', cssTplTranspile);
+
+	// Watch scss files in src folder
+	gulp.watch('protected/src/**/*.scss', cssSrcTranspile);
 
 	// Watch js files
 	gulp.watch(jsFiles, jsConcat);
 }
 
-// Public task
-exports.css   = gulp.parallel(cssAppTranspile, cssComponentTranspile, cssPageTranspile);
+// Public tasks
+exports.css   = gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile);
 exports.js    = jsConcat;
 exports.watch = watch;
 
 // Build task
-exports.build = gulp.parallel(cssAppTranspile, cssComponentTranspile, cssPageTranspile, gulp.series(jsConcat, jsUglify));
+exports.build = gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify));
 
 // Default Task
-exports.default = gulp.series(gulp.parallel(cssAppTranspile, cssComponentTranspile, cssPageTranspile, jsConcat), watch);
+exports.default = gulp.series(gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, jsConcat), watch);
