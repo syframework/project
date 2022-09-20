@@ -2,7 +2,10 @@ protected/log
 protected/vendor
 composer.lock
 node_modules/
-protected/scss/vendor/
 package-lock.json
 upload/
 *.ini
+assets/css/app.css*
+assets/js/app.js*
+protected/templates/**/*.css
+protected/src/**/*.css
