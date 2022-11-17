@@ -17,7 +17,7 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 			],
 			[
 				'label'     => 'Old password',
-				'validator' => [$this, 'oldPasswordValidator']
+				'validator' => [$this, 'oldPasswordValidator'],
 			],
 			$f
 		);
@@ -29,7 +29,7 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 			],
 			[
 				'label'     => 'New password',
-				'validator' => [$this, 'passwordValidator']
+				'validator' => [$this, 'passwordValidator'],
 			],
 			$f
 		);
@@ -43,10 +43,12 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 				'label' => 'Confirm new password',
 				'validator' => function($value, $element) {
 					$password = $this->post('new_password');
-					if (!empty($value) and $value === $password) return true;
+					if (!empty($value) and $value === $password) {
+						return true;
+					}
 					$element->setError('Password error');
 					return false;
-				}
+				},
 			]
 		);
 		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'fas fa-save']);
@@ -55,7 +57,9 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 	public function oldPasswordValidator($value, $element) {
 		$service = \Sy\Bootstrap\Service\Container::getInstance();
 		$user = $service->user->getCurrentUser();
-		if ($service->user->passwordVerify($value, $user->password)) return true;
+		if ($service->user->passwordVerify($value, $user->password)) {
+			return true;
+		}
 		$element->setError('Password error');
 		return false;
 	}
@@ -85,7 +89,7 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 			if (is_null($this->getOption('error'))) {
 				$this->setError($this->_('An error occured'));
 			}
-		} catch(\Sy\Bootstrap\Service\User\Exception $e) {
+		} catch (\Sy\Bootstrap\Service\User\Exception $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('An error occured'));
 		}

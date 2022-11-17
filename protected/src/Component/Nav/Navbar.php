@@ -5,9 +5,11 @@ use Sy\Bootstrap\Lib\Url;
 
 class Navbar extends \Sy\Component\WebComponent {
 
-	public function __toString() {
-		$this->init();
-		return parent::__toString();
+	public function __construct() {
+		parent::__construct();
+		$this->mount(function () {
+			$this->init();
+		});
 	}
 
 	private function init() {
@@ -30,9 +32,9 @@ class Navbar extends \Sy\Component\WebComponent {
 				'menu' => [
 					'About us' => ['fa' => 'users fa-fw', 'page' => 'about-us'],
 					'Conditions of use' => ['fa' => 'info-circle fa-fw', 'page' => 'use'],
-					'Privacy policy' => ['fa' => 'user-shield fa-fw', 'page' => 'privacy']
-				]
-			]
+					'Privacy policy' => ['fa' => 'user-shield fa-fw', 'page' => 'privacy'],
+				],
+			],
 		];
 		$menu = new \Sy\Bootstrap\Component\Nav\Menu($data);
 		$menu->setAttribute('class', "me-auto");
@@ -56,8 +58,8 @@ class Navbar extends \Sy\Component\WebComponent {
 					'page' => 'user',
 					'param' => ['id' => $user->id],
 					'class' => 'dropdown-menu-end',
-					'menu' => $m
-				]
+					'menu' => $m,
+				],
 			];
 		} else {
 			$data = ['Sign In' => ['fa' => 'power-off fa-fw', 'page' => 'user-connection']];

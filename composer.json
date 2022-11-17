@@ -19,5 +19,12 @@
 		"psr-4": {
 			"Project\\": "protected/src/"
 		}
+	},
+	"require-dev": {
+		"sy/coding-standard": "^1.0"
+	},
+	"scripts": {
+		"format": "protected/vendor/bin/phpcbf --colors --standard=protected/vendor/sy/coding-standard/ruleset.xml protected/src",
+		"check": "protected/vendor/bin/phpcs --colors --standard=protected/vendor/sy/coding-standard/ruleset.xml protected/src"
 	}
 }
