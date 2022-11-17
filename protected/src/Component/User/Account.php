@@ -19,37 +19,34 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				'value'     => $user->email,
 				'required'  => 'required',
 				'maxlength' => 64,
-				'readonly'  => 'readonly'
+				'readonly'  => 'readonly',
 			], [
 				'label' => 'E-mail',
-			], $f
-		);
+			], $f);
 
 		// Firstname
 		$this->addTextInput([
 				'name'      => 'firstname',
 				'value'     => $user->firstname,
 				'required'  => 'required',
-				'maxlength' => 64
+				'maxlength' => 64,
 			], [
 				'label' => 'Firstname',
-			], $f
-		);
+			], $f);
 
 		// Lastname
 		$this->addTextInput([
 				'name'      => 'lastname',
 				'value'     => $user->lastname,
-				'maxlength' => 64
+				'maxlength' => 64,
 			], [
 				'label' => 'Lastname',
-			], $f
-		);
+			], $f);
 
 		// Description
 		$this->addTextarea([
 			'name'      => 'description',
-			'maxlength' => 500
+			'maxlength' => 500,
 		], [
 			'label' => 'Description',
 		], $f)->addText($user->description);
@@ -57,7 +54,7 @@ class Account extends \Sy\Bootstrap\Component\Form {
 		// Language
 		$this->addSelect([
 			'name'     => 'language',
-			'required' => 'required'
+			'required' => 'required',
 		], [
 			'label'    => 'Language',
 			'options'  => LANGS,
@@ -69,8 +66,8 @@ class Account extends \Sy\Bootstrap\Component\Form {
 						$this->setError($this->_('Language error'));
 					}
 					return $res;
-				}
-			]
+				},
+			],
 		], $f);
 
 		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'fas fa-save']);
@@ -85,21 +82,21 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				'firstname'   => $this->post('firstname'),
 				'lastname'    => $this->post('lastname'),
 				'description' => $this->post('description'),
-				'language'    => $this->post('language')
+				'language'    => $this->post('language'),
 			]);
 			setcookie('sy_language', $this->post('language'), time() + 60 * 60 * 24 * 365, WEB_ROOT . '/');
 			$this->setSuccess($this->_('Change saved'));
-		} catch(\Sy\Component\Html\Form\Exception $e) {
+		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
 			if (is_null($this->getOption('error'))) {
 				$this->setError($this->_('Please fill the form correctly'));
 			}
 			$this->fill($_POST);
-		} catch(\Sy\Db\MySql\DuplicateEntryException $e) {
+		} catch (\Sy\Db\MySql\DuplicateEntryException $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('User already exists'));
 			$this->fill($_POST);
-		} catch(\Sy\Db\MySql\Exception $e) {
+		} catch (\Sy\Db\MySql\Exception $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('An error occured'));
 		}

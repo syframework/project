@@ -61,7 +61,7 @@ function cssSrcTranspile() {
 }
 
 // Watch scss & js files
-function watch () {
+function watch() {
 	// Watch scss files in scss folder
 	gulp.watch('protected/scss/**/*.scss', gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile));
 

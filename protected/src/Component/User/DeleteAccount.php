@@ -17,13 +17,13 @@ class DeleteAccount extends \Sy\Bootstrap\Component\Form {
 			],
 			[
 				'label'     => 'Password',
-				'validator' => [$this, 'passwordValidator']
+				'validator' => [$this, 'passwordValidator'],
 			],
 			$f
 		);
 		$this->addButton('Delete account', [
 			'type'    => 'submit',
-			'onclick' => "return confirm('" . $this->_('Delete your account?') . "')"
+			'onclick' => "return confirm('" . $this->_('Delete your account?') . "')",
 		], ['color' => 'danger', 'icon' => 'fas fa-trash-alt'], $f);
 	}
 
@@ -35,11 +35,11 @@ class DeleteAccount extends \Sy\Bootstrap\Component\Form {
 			$service->user->delete(['id' => $user->id]);
 			$service->user->signOut();
 			$this->redirect(WEB_ROOT . '/');
-		} catch(\Sy\Component\Html\Form\Exception $e) {
+		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
 			$this->setError($this->_('An error occured'));
 			$this->fill($_POST);
-		} catch(\Sy\Bootstrap\Service\User\Exception $e) {
+		} catch (\Sy\Bootstrap\Service\User\Exception $e) {
 			$this->logWarning($e->getMessage());
 			$this->setError($this->_('An error occured'));
 		}
