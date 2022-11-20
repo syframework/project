@@ -11,6 +11,10 @@
 		"Android >= 4.4",
 		"Opera >= 30"
 	],
+	"overrides": {
+		"glob-parent": "^6.0.0",
+		"chokidar": "^3.5.3"
+	},
 	"devDependencies": {
 		"@fortawesome/fontawesome-free": "^5.15.1",
 		"autoprefixer": "^9.8.6",

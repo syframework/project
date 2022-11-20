@@ -62,7 +62,26 @@ To build css (```protected/scss/app.scss``` -> ```assets/css/app.css```)
 gulp css
 ```
 
-To build js (```protected/js/app.js``` -> ```assets/js/app.js```)
+To build js (```protected/js/*.js``` -> ```assets/js/app.js```)
 ```
 gulp js
 ```
+
+## Check/format PHP coding style
+
+Update dependencies with composer
+```
+composer update
+```
+
+Check the coding style
+```
+composer check
+```
+
+Format the coding style
+```
+composer format
+```
+
+Coding standard ruleset used: [sy/coding-standard](https://github.com/syframework/coding-standard)
