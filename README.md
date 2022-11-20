@@ -45,9 +45,14 @@ encryption = tls
 
 Use the database installation script: ```protected/sql/V1__init.sql```
 
-If you have Docker installed, you can use the helper script: ```protected/sql/flyway.sh```
+If you have Docker installed, you can use the helper script:
 ```
-./flyway.sh migrate
+composer db [FLYWAY COMMAND]
+```
+
+Example:
+```
+composer db migrate
 ```
 
 ## Build CSS & JS
@@ -69,19 +74,19 @@ gulp js
 
 ## Check/format PHP coding style
 
-Update dependencies with composer
-```
-composer update
-```
-
 Check the coding style
 ```
-composer check
+composer check [FILE or DIRECTORY]
 ```
 
 Format the coding style
 ```
-composer format
+composer format [FILE or DIRECTORY]
+```
+
+Example:
+```
+composer format protected/src
 ```
 
 Coding standard ruleset used: [sy/coding-standard](https://github.com/syframework/coding-standard)
