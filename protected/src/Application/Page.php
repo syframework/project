@@ -1,6 +1,8 @@
 <?php
 namespace Project\Application;
 
+use Sy\Bootstrap\Lib\Url;
+
 class Page extends \Sy\Bootstrap\Application\Page {
 
 	/**
@@ -12,20 +14,31 @@ class Page extends \Sy\Bootstrap\Application\Page {
 		if (!$user->isConnected() or $user->hasRole('blacklisted')) {
 			$this->redirect(WEB_ROOT . '/');
 		}
+
 		$sections = [
-			'index'  => $this->_('Account informations'),
-			'change' => $this->_('Change password'),
-			'delete' => $this->_('Delete account'),
+			'index'  => 'Account informations',
+			'change' => 'Change password',
+			'delete' => 'Delete account',
 		];
-		$nav = new \Sy\Component\Html\Navigation();
-		$nav->setAttribute('class', 'nav nav-pills flex-column');
+		$data = [];
 		foreach ($sections as $id => $label) {
-			$active = $id == $this->get('s', 'index') ? 'active' : '';
-			$i = $nav->addItem($label, Url::build('page', 'user-account', array('s' => $id)), ['class' => "nav-link $active"]);
-			$i->setAttribute('class', 'nav-item');
+			$data[$this->_($label)] = Url::build('page', 'user-account', ['s' => $id]);
 		}
+
+		// Current section id
+		$sectionId = $this->get('s', 'index');
+
+		$nav = new \Sy\Component\Html\Navigation(
+			$data,
+			active: Url::build('page', 'user-account', ['s' => $sectionId]),
+			attributes: ['class' => 'nav nav-pills flex-column'],
+			itemAttributes: ['class' => 'nav-item'],
+			linkAttributes: ['class' => 'nav-link'],
+		);
+		$nav->getActiveLink()->addClass('active');
+
 		$this->setContentVars([
-			'TITLE'   => $sections[$this->get('s', 'index')],
+			'TITLE'   => $this->_($sections[$sectionId]),
 			'NAV'     => $nav,
 			'CONTENT' => new \Project\Component\User\AccountPanel(),
 		]);
