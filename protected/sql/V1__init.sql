@@ -6,31 +6,23 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `t_page`;
 CREATE TABLE `t_page` (
   `id` varchar(24) NOT NULL,
-  `lang` varchar(3) NOT NULL DEFAULT '' COMMENT 'hidden',
   `title` varchar(128) DEFAULT NULL,
   `description` varchar(512) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'none',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'none',
-  PRIMARY KEY (`id`,`lang`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of t_page
 -- ----------------------------
-INSERT INTO `t_page` (id, lang, title) VALUES ('about-us', 'en', 'About us');
-INSERT INTO `t_page` (id, lang, title) VALUES ('about-us', 'fr', 'A propos de nous');
-INSERT INTO `t_page` (id, lang, title) VALUES ('home', 'en', 'Home');
-INSERT INTO `t_page` (id, lang, title) VALUES ('home', 'fr', 'Accueil');
-INSERT INTO `t_page` (id, lang, title) VALUES ('privacy', 'en', 'Privacy policy');
-INSERT INTO `t_page` (id, lang, title) VALUES ('privacy', 'fr', 'Politique de confidentialité');
-INSERT INTO `t_page` (id, lang, title) VALUES ('use', 'en', 'Conditions of use');
-INSERT INTO `t_page` (id, lang, title) VALUES ('use', 'fr', "Conditions générales d'utilisation");
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-account', 'en', 'My account');
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-account', 'fr', 'Mon compte');
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-connection', 'en', 'Sign-In');
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-connection', 'fr', 'Connectez-vous');
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-password', 'en', 'Choose a new password');
-INSERT INTO `t_page` (id, lang, title) VALUES ('user-password', 'fr', 'Choisir un nouveau mot de passe');
+INSERT INTO `t_page` (id, title) VALUES ('about-us', 'About us');
+INSERT INTO `t_page` (id, title) VALUES ('home', 'Home');
+INSERT INTO `t_page` (id, title) VALUES ('privacy', 'Privacy policy');
+INSERT INTO `t_page` (id, title) VALUES ('use', 'Conditions of use');
+INSERT INTO `t_page` (id, title) VALUES ('user-account', 'My account');
+INSERT INTO `t_page` (id, title) VALUES ('user-connection', 'Sign-In');
+INSERT INTO `t_page` (id, title) VALUES ('user-password', 'Choose a new password');
 
 -- ----------------------------
 -- Table structure for t_page_history
@@ -38,15 +30,14 @@ INSERT INTO `t_page` (id, lang, title) VALUES ('user-password', 'fr', 'Choisir u
 DROP TABLE IF EXISTS `t_page_history`;
 CREATE TABLE `t_page_history` (
   `page_id` varchar(24) NOT NULL,
-  `page_lang` varchar(3) NOT NULL DEFAULT '' COMMENT 'hidden',
   `page_crc32` bigint NOT NULL,
   `page_content` text NOT NULL,
   `user_id` int unsigned DEFAULT NULL,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`page_id`,`page_lang`,`page_crc32`),
+  PRIMARY KEY (`page_id`,`page_crc32`),
   KEY `t_page_history_ibfk_1` (`user_id`) USING BTREE,
   CONSTRAINT `t_page_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `t_page_history_ibfk_2` FOREIGN KEY (`page_id`, `page_lang`) REFERENCES `t_page` (`id`, `lang`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `t_page_history_ibfk_2` FOREIGN KEY (`page_id`) REFERENCES `t_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
@@ -141,10 +132,8 @@ CREATE TABLE `t_user_role_has_permission` (
 -- Records of t_user_role_has_permission
 -- ----------------------------
 INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-create');
-INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-css');
+INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-code');
 INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-delete');
-INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-html');
-INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-js');
 INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-update');
 INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-update-inline');
 
