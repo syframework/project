@@ -21,7 +21,7 @@ INSERT INTO `t_page` (id, title) VALUES ('home', 'Home');
 INSERT INTO `t_page` (id, title) VALUES ('privacy', 'Privacy policy');
 INSERT INTO `t_page` (id, title) VALUES ('use', 'Conditions of use');
 INSERT INTO `t_page` (id, title) VALUES ('user-account', 'My account');
-INSERT INTO `t_page` (id, title) VALUES ('user-connection', 'Sign-In');
+INSERT INTO `t_page` (id, title) VALUES ('user-connection', 'Sign In');
 INSERT INTO `t_page` (id, title) VALUES ('user-password', 'Choose a new password');
 
 -- ----------------------------
