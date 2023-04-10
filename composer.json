@@ -39,10 +39,7 @@
 			"sudo chmod -R a+w ."
 		],
 		"install-plugin": [
-			"Sy\\Bootstrap\\Plugin::install",
-			"@build",
-			"@db migrate",
-			"sudo chmod -R a+w ."
+			"Sy\\Bootstrap\\Plugin::install"
 		],
 		"build": "id -nG \"$USER\" | grep -qw docker && SUDO=sudo;$SUDO docker run --pull always --rm -v \"$PWD\":/syproject -w /syproject node:slim /bin/bash -c \"npm install;npm install -g gulp-cli;gulp build\"",
 		"db": "protected/vendor/bin/flyway --conf protected/conf/database.ini --sql protected/sql --task",
