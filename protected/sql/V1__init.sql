@@ -3,7 +3,6 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for t_page
 -- ----------------------------
-DROP TABLE IF EXISTS `t_page`;
 CREATE TABLE `t_page` (
   `id` varchar(24) NOT NULL,
   `title` varchar(128) DEFAULT NULL,
@@ -27,7 +26,6 @@ INSERT INTO `t_page` (id, title) VALUES ('user-password', 'Choose a new password
 -- ----------------------------
 -- Table structure for t_page_history
 -- ----------------------------
-DROP TABLE IF EXISTS `t_page_history`;
 CREATE TABLE `t_page_history` (
   `page_id` varchar(24) NOT NULL,
   `page_crc32` bigint NOT NULL,
@@ -43,7 +41,6 @@ CREATE TABLE `t_page_history` (
 -- ----------------------------
 -- Table structure for t_user
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role` varchar(32) DEFAULT 'user',
@@ -67,7 +64,6 @@ CREATE TABLE `t_user` (
 -- ----------------------------
 -- Table structure for t_user_has_permission
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_has_permission`;
 CREATE TABLE `t_user_has_permission` (
   `id` int unsigned NOT NULL,
   `permission` varchar(32) NOT NULL DEFAULT '',
@@ -80,7 +76,6 @@ CREATE TABLE `t_user_has_permission` (
 -- ----------------------------
 -- Table structure for t_user_permission
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_permission`;
 CREATE TABLE `t_user_permission` (
   `id` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL DEFAULT '',
@@ -99,7 +94,6 @@ INSERT INTO `t_user_permission` VALUES ('page-update-inline', 'Update a page wit
 -- ----------------------------
 -- Table structure for t_user_role
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_role`;
 CREATE TABLE `t_user_role` (
   `id` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL DEFAULT '',
@@ -117,7 +111,6 @@ INSERT INTO `t_user_role` VALUES ('user', 'Simple user');
 -- ----------------------------
 -- Table structure for t_user_role_has_permission
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_role_has_permission`;
 CREATE TABLE `t_user_role_has_permission` (
   `id_role` varchar(32) NOT NULL,
   `id_permission` varchar(32) NOT NULL,
@@ -140,7 +133,6 @@ INSERT INTO `t_user_role_has_permission` VALUES ('super-admin', 'page-update-inl
 -- ----------------------------
 -- Table structure for t_user_setting
 -- ----------------------------
-DROP TABLE IF EXISTS `t_user_setting`;
 CREATE TABLE `t_user_setting` (
   `user_id` int unsigned NOT NULL,
   `key` varchar(32) NOT NULL,
