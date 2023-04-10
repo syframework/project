@@ -34,6 +34,13 @@ function jsUglify() {
 		.pipe(gulp.dest('assets/js'));
 }
 
+// Concat plugin scss: protected/scss/_bootstrap-*.scss -> protected/scss/_plugin.scss
+function cssPluginConcat() {
+	return gulp.src('protected/scss/_bootstrap-*.scss')
+		.pipe(concat('_plugin.scss'))
+		.pipe(gulp.dest('protected/scss'));
+}
+
 // Transpile & minify: protected/scss/app.scss -> assets/css/app.css
 function cssAppTranspile() {
 	return gulp.src('protected/scss/app.scss')
@@ -76,12 +83,12 @@ function watch() {
 }
 
 // Public tasks
-exports.css   = gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile);
+exports.css   = gulp.series(cssPluginConcat, gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile));
 exports.js    = jsConcat;
 exports.watch = watch;
 
 // Build task
-exports.build = gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify));
+exports.build = gulp.series(cssPluginConcat, gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify)));
 
 // Default Task
 exports.default = gulp.series(gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, jsConcat), watch);

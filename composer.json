@@ -3,7 +3,7 @@
 	"description": "Project template",
 	"type": "project",
 	"require": {
-		"sy/bootstrap": "dev-develop"
+		"sy/bootstrap": "^0.4.0"
 	},
 	"license": "MIT",
 	"authors": [
@@ -38,6 +38,12 @@
 			"@db migrate",
 			"sudo chmod -R a+w ."
 		],
+		"install-plugin": [
+			"Sy\\Bootstrap\\Plugin::install",
+			"@build",
+			"@db migrate",
+			"sudo chmod -R a+w ."
+		],
 		"build": "id -nG \"$USER\" | grep -qw docker && SUDO=sudo;$SUDO docker run --pull always --rm -v \"$PWD\":/syproject -w /syproject node:slim /bin/bash -c \"npm install;npm install -g gulp-cli;gulp build\"",
 		"db": "protected/vendor/bin/flyway --conf protected/conf/database.ini --sql protected/sql --task",
 		"format": "protected/vendor/bin/phpcbf --colors --standard=protected/vendor/sy/coding-standard/ruleset.xml",
@@ -45,6 +51,7 @@
 	},
 	"scripts-descriptions": {
 		"install-project": "Full project installation",
+		"install-plugin": "Plugin installation: composer install-plugin [REQUIRED PLUGIN NAME] [OPTIONAL VERSION NUMBER] (Plugin name: article, cms, message, location, link etc...)",
 		"build": "Compile and build all CSS and JS assets",
 		"db": "Run Flyway: composer db [migrate|info|repair|clean|validate|baseline]",
 		"format": "Format the PHP coding style: composer format [FILE OR DIRECTORY]",
