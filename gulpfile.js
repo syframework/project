@@ -13,6 +13,7 @@ const jsFiles = [
 	'node_modules/@fortawesome/fontawesome-free/js/all.min.js',
 	'node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js',
 	'node_modules/autosize/dist/autosize.min.js',
+	'node_modules/luxon/build/global/luxon.min.js',
 	'protected/js/**/*.js'
 ];
 
