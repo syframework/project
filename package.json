@@ -26,10 +26,11 @@
 		"gulp-postcss": "^8.0.0",
 		"gulp-sass": "^5.1.0",
 		"gulp-sourcemaps": "^2.6.5",
+		"gulp-svg-sprite": "^2.0.3",
 		"gulp-uglify": "^3.0.2",
 		"jquery": "^3.5.1",
+		"luxon": "^3.3.0",
 		"sass": "^1.54.8",
-		"smoothscroll-polyfill": "^0.4.4",
-		"luxon": "^3.3.0"
+		"smoothscroll-polyfill": "^0.4.4"
 	}
 }

@@ -60,9 +60,9 @@ class Page extends \Sy\Bootstrap\Application\Page {
 		$this->addLink(['rel' => 'manifest', 'href' => WEB_ROOT . '/site.webmanifest']);
 		$this->addLink(['rel' => 'mask-icon', 'href' => WEB_ROOT . '/assets/img/icons/safari-pinned-tab.svg', 'color' => '#3A5199']);
 		$this->setFavicon(WEB_ROOT . '/assets/img/icons/favicon.ico');
-		$this->setMeta('msapplication-TileColor', '#3A5199');
+		$this->setMeta('msapplication-TileColor', '#ffffff');
 		$this->setMeta('msapplication-config', WEB_ROOT . '/browserconfig.xml');
-		$this->setMeta('theme-color', '#3A5199');
+		$this->setMeta('theme-color', '#ffffff');
 
 		// Application css
 		$this->addCssLink(WEB_ROOT . '/assets/css/app.css');
