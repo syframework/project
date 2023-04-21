@@ -75,7 +75,7 @@ function svgCompile() {
 		mode: {
 			symbol: {
 				dest: '',
-				sprite: 'toto.svg'
+				sprite: 'sprite.svg'
 			}
 		}
 	};
