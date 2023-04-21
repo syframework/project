@@ -5,6 +5,7 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const svgSprite = require('gulp-svg-sprite');
 
 // Javascript files to concat into assets/js/app.js
 const jsFiles = [
@@ -68,6 +69,21 @@ function cssSrcTranspile() {
 		.pipe(gulp.dest('protected/src'));
 }
 
+// Compile all the svg in a sprite
+function svgCompile() {
+	let config = {
+		mode: {
+			symbol: {
+				dest: '',
+				sprite: 'sprite.svg'
+			}
+		}
+	};
+	return gulp.src('protected/svg/**/*.svg')
+		.pipe(svgSprite(config))
+		.pipe(gulp.dest('assets/img'));
+}
+
 // Watch scss & js files
 function watch() {
 	// Watch scss files in scss folder
@@ -81,15 +97,19 @@ function watch() {
 
 	// Watch js files
 	gulp.watch(jsFiles, jsConcat);
+
+	// Watch svg files
+	gulp.watch('protected/svg/**/*.svg', svgCompile);
 }
 
 // Public tasks
 exports.css   = gulp.series(cssPluginConcat, gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile));
 exports.js    = jsConcat;
+exports.svg   = svgCompile;
 exports.watch = watch;
 
 // Build task
-exports.build = gulp.series(cssPluginConcat, gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify)));
+exports.build = gulp.series(cssPluginConcat, gulp.parallel(svgCompile, cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify)));
 
 // Default Task
-exports.default = gulp.series(gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile, jsConcat), watch);
+exports.default = gulp.series(gulp.parallel(svgCompile, cssAppTranspile, cssTplTranspile, cssSrcTranspile, jsConcat), watch);
