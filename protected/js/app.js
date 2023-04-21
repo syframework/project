@@ -52,4 +52,19 @@
 			$('body').addClass('modal-open');
 		}
 	});
+
+	// Datetime
+	$('body').on('feed-loaded', updateTime); // Update datetime when a feed is loaded
+
+	setInterval(updateTime, 60000); // Update datetime every minute
+
+	function updateTime() {
+		$('[data-date]').each(function() {
+			if ($(this).data('date-format') !== undefined) {
+				$(this).text(DateTime.fromSeconds($(this).data('date')).toLocaleString($(this).data('date-format')));
+			} else {
+				$(this).text(luxon.DateTime.fromSeconds($(this).data('date')).toRelative());
+			}
+		});
+	}
 })();
