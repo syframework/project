@@ -6,7 +6,7 @@ SET FOREIGN_KEY_CHECKS=0;
 CREATE TABLE `t_page` (
   `id` varchar(24) NOT NULL,
   `title` varchar(128) DEFAULT NULL,
-  `description` varchar(512) DEFAULT NULL,
+  `description` varchar(512) DEFAULT NULL COMMENT 'textarea',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'none',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'none',
   PRIMARY KEY (`id`)
@@ -22,21 +22,6 @@ INSERT INTO `t_page` (id, title) VALUES ('use', 'Conditions of use');
 INSERT INTO `t_page` (id, title) VALUES ('user-account', 'My account');
 INSERT INTO `t_page` (id, title) VALUES ('user-connection', 'Sign In');
 INSERT INTO `t_page` (id, title) VALUES ('user-password', 'Choose a new password');
-
--- ----------------------------
--- Table structure for t_page_history
--- ----------------------------
-CREATE TABLE `t_page_history` (
-  `page_id` varchar(24) NOT NULL,
-  `page_crc32` bigint NOT NULL,
-  `page_content` text NOT NULL,
-  `user_id` int unsigned DEFAULT NULL,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`page_id`,`page_crc32`),
-  KEY `t_page_history_ibfk_1` (`user_id`) USING BTREE,
-  CONSTRAINT `t_page_history_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `t_page_history_ibfk_2` FOREIGN KEY (`page_id`) REFERENCES `t_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Table structure for t_user
