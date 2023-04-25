@@ -3,7 +3,7 @@
 	"description": "Project template",
 	"type": "project",
 	"require": {
-		"sy/bootstrap": "^0.4.0"
+		"sy/bootstrap": "*"
 	},
 	"license": "MIT",
 	"authors": [
@@ -24,9 +24,9 @@
 		}
 	},
 	"require-dev": {
-		"sy/coding-standard": "^1.0",
-		"sy/genini": "^1.1",
-		"sy/flyway": "^1.1"
+		"sy/coding-standard": "*",
+		"sy/genini": "*",
+		"sy/flyway": "*"
 	},
 	"scripts": {
 		"post-create-project-cmd": "@install-project",
