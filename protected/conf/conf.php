@@ -90,7 +90,7 @@ define('LANGS', ['fr' => 'Fran&ccedil;ais', 'en' => 'English']);
 define('SALT', PROJECT);
 
 // CDN urls
-define('CKEDITOR_JS'          , 'https://cdn.ckeditor.com/4.20.2/full-all/ckeditor.js');
+define('CKEDITOR_JS'          , 'https://cdn.ckeditor.com/4.21.0/full-all/ckeditor.js');
 define('CKEDITOR_ROOT'        , WEB_ROOT . '/assets/ckeditor');
 define('MOMENT_JS'            , 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js');
 define('JQUERY_UI_JS'         , ['url' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', 'integrity' => 'sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=']);
