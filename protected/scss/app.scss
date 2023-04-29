@@ -20,6 +20,11 @@ $logo-height: $nav-link-height;
 body {
 	padding-top: $logo-height + $navbar-padding-y * 2;
 	overflow-x: hidden;
+	min-height: 100vh;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: 1fr auto;
+	align-items: center;
 }
 
 // Navbar
