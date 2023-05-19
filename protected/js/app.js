@@ -61,7 +61,7 @@
 	function updateTime() {
 		$('[data-date]').each(function() {
 			if ($(this).data('date-format') !== undefined) {
-				$(this).text(DateTime.fromSeconds($(this).data('date')).toLocaleString($(this).data('date-format')));
+				$(this).text(luxon.DateTime.fromSeconds($(this).data('date')).toLocaleString($(this).data('date-format')));
 			} else {
 				$(this).text(luxon.DateTime.fromSeconds($(this).data('date')).toRelative());
 			}
