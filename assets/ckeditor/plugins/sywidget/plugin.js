@@ -42,8 +42,18 @@ function storeAttributes(element) {
 }
 
 function restoreAttributes(element) {
-	element.attributes = JSON.parse(element.attributes['data-sylock-attributes']);
-	delete element.attributes['data-sylock-attributes'];
+	if (typeof element.attributes['data-widget'] !== 'undefined' && typeof element.attributes['data-sylock-attributes'] === 'undefined') {
+		delete element.attributes['data-widget'];
+		var parent = element.getAscendant('div');
+		if (parent !== null) {
+			parent.replaceWith(element);
+		}
+	}
+
+	if (typeof element.attributes['data-sylock-attributes'] !== 'undefined') {
+		element.attributes = JSON.parse(element.attributes['data-sylock-attributes']);
+		delete element.attributes['data-sylock-attributes'];
+	}
 
 	element.children.forEach(function (element) {
 		if (element.type === CKEDITOR.NODE_ELEMENT) {
