@@ -41,6 +41,7 @@
 			"protected/vendor/bin/genini '{\"file\":\"protected/conf/smtp.ini\",\"input\":{\"host\":{\"question\":\"SMTP hostname (An IP address or FQDN of the SMTP server)\",\"default\":\"smtp.office365.com\"},\"port\":{\"question\":\"SMTP port (Usually 465 or 587)\",\"default\":\"587\"},\"username\":{\"question\":\"SMTP user (User name used to connect to the SMTP server. Leave empty if no authentication is required)\"},\"password\":{\"question\":\"SMTP password (Password of the SMTP user. Leave empty if no authentication is required)\"},\"encryption\":{\"question\":\"Encryption (Usually tls on port 587 and ssl on port 465)\",\"default\":\"tls\"}}}'",
 			"@composer install",
 			"@build",
+			"@db repair",
 			"@db migrate",
 			"sudo chmod -R a+w ."
 		],
