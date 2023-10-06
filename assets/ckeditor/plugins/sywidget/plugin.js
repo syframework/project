@@ -42,10 +42,18 @@ function storeAttributes(element) {
 }
 
 function restoreAttributes(element) {
-	if (typeof element.attributes['data-widget'] !== 'undefined' && typeof element.attributes['data-sylock-attributes'] === 'undefined') {
+	if (typeof element.attributes['data-widget'] !== 'undefined') {
 		delete element.attributes['data-widget'];
 		var parent = element.getAscendant('div');
 		if (parent !== null) {
+			if (typeof element.attributes['data-sylock-attributes'] !== 'undefined') {
+				delete element.attributes['data-sylock-attributes'];
+			}
+
+			if (typeof element.attributes['data-sycomponent-slot'] !== 'undefined' && element.attributes['data-sycomponent-slot'].length > 0) {
+				element.setHtml(element.attributes['data-sycomponent-slot']);
+				delete element.attributes['data-sycomponent-slot'];
+			}
 			parent.replaceWith(element);
 		}
 	}
