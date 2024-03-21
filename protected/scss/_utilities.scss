@@ -19,9 +19,7 @@
 	height: 38px !important;
 	border-radius: 50% !important;
 	padding: 0 !important;
-	line-height: 36px !important;
-
-	svg {
-		vertical-align: -0.125em !important;
-	}
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
