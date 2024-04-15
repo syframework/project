@@ -33,7 +33,7 @@ class Navbar extends \Sy\Component\WebComponent {
 				'menu' => [
 					'About us' => ['icon' => new Icon('users'), 'page' => 'about-us'],
 					'Conditions of use' => ['icon' => new Icon('info-circle'), 'page' => 'use'],
-					'Privacy policy' => ['icon' => new Icon('shield'), 'page' => 'privacy'],
+					'Privacy policy' => ['icon' => new Icon('user-shield'), 'page' => 'privacy'],
 				],
 			],
 		];
