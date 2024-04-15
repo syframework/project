@@ -2,6 +2,7 @@
 namespace Project\Component\Nav;
 
 use Sy\Bootstrap\Lib\Url;
+use Sy\Bootstrap\Component\Icon;
 
 class Navbar extends \Sy\Component\WebComponent {
 
@@ -26,13 +27,13 @@ class Navbar extends \Sy\Component\WebComponent {
 
 	private function menu() {
 		$data = [
-			'Home'     => ['fa' => 'home fa-fw', 'page' => 'home'],
+			'Home'     => ['icon' => new Icon('home'), 'page' => 'home'],
 			'About' => [
-				'fa' => 'question-circle fa-fw',
+				'icon' => new Icon('question-circle'),
 				'menu' => [
-					'About us' => ['fa' => 'users fa-fw', 'page' => 'about-us'],
-					'Conditions of use' => ['fa' => 'info-circle fa-fw', 'page' => 'use'],
-					'Privacy policy' => ['fa' => 'user-shield fa-fw', 'page' => 'privacy'],
+					'About us' => ['icon' => new Icon('users'), 'page' => 'about-us'],
+					'Conditions of use' => ['icon' => new Icon('info-circle'), 'page' => 'use'],
+					'Privacy policy' => ['icon' => new Icon('shield'), 'page' => 'privacy'],
 				],
 			],
 		];
@@ -47,9 +48,9 @@ class Navbar extends \Sy\Component\WebComponent {
 		$user    = $service->user->getCurrentUser();
 		if ($user->isConnected()) {
 			$m = [
-				'Account settings' => ['fa' => 'cog fa-fw', 'page' => 'user-account'],
+				'Account settings' => ['icon' => new Icon('gear'), 'page' => 'user-account'],
 				'-',
-				'Sign Out' => ['fa' => 'power-off fa-fw', 'url' => Url::build('user', 'signOut')],
+				'Sign Out' => ['icon' => new Icon('power'), 'url' => Url::build('user', 'signOut')],
 			];
 
 			$name = htmlentities(trim($user->firstname . ' ' . $user->lastname), ENT_QUOTES, 'UTF-8');
@@ -62,7 +63,7 @@ class Navbar extends \Sy\Component\WebComponent {
 				],
 			];
 		} else {
-			$data = ['Sign In' => ['fa' => 'power-off fa-fw', 'page' => 'user-connection']];
+			$data = ['Sign In' => ['icon' => new Icon('power'), 'page' => 'user-connection']];
 		}
 
 		$menu = new \Sy\Bootstrap\Component\Nav\Menu($data);

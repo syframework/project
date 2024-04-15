@@ -41,6 +41,9 @@ define('DEFAULT_AVATAR_DIR', __DIR__ . '/../../assets/img/avatar');
 // Client path to the default avatars directory.
 define('DEFAULT_AVATAR_ROOT', WEB_ROOT . '/assets/img/avatar');
 
+// Svg icons directory
+define('SVG_ICON_DIR', __DIR__ . '/../svg/icon');
+
 //------------------------------------------------------------------------------
 // Controller trigger
 //------------------------------------------------------------------------------
