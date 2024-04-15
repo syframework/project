@@ -9,9 +9,7 @@ const svgSprite = require('gulp-svg-sprite');
 
 // Javascript files to concat into assets/js/app.js
 const jsFiles = [
-	'node_modules/jquery/dist/jquery.min.js',
 	'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
-	'node_modules/@fortawesome/fontawesome-free/js/all.min.js',
 	'node_modules/smoothscroll-polyfill/dist/smoothscroll.min.js',
 	'node_modules/autosize/dist/autosize.min.js',
 	'node_modules/luxon/build/global/luxon.min.js',
