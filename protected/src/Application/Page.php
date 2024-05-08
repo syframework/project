@@ -2,8 +2,6 @@
 namespace Project\Application;
 
 use Sy\Bootstrap\Lib\Url;
-use Sy\Bootstrap\Lib\Icon\PolicyManager;
-use Sy\Bootstrap\Lib\Icon\SvgPolicy;
 
 class Page extends \Sy\Bootstrap\Application\Page {
 
@@ -74,9 +72,6 @@ class Page extends \Sy\Bootstrap\Application\Page {
 
 		// Navbar menu
 		$this->setLayoutVars(['_NAV' => new \Project\Component\Nav\Navbar()]);
-
-		// Icon configuration
-		PolicyManager::addPolicy(new SvgPolicy(SVG_ICON_DIR));
 	}
 
 	protected function postInit() {
