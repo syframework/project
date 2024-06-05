@@ -1,54 +1,63 @@
 <?php
 namespace Project\Component\User;
 
-class DeleteAccount extends \Sy\Bootstrap\Component\Form {
+class DeleteAccount extends \Sy\Bootstrap\Component\Form\Crud\Delete {
+
+	/**
+	 * @var int
+	 */
+	private $userId;
+
+	/**
+	 * @param int $userId
+	 */
+	public function __construct($userId) {
+		parent::__construct('user', ['id' => $userId]);
+		$this->userId = $userId;
+	}
 
 	public function init() {
-		parent::init();
+		$this->setOptions([
+			'button-label' => 'Delete account',
+			'confirm' => 'Delete your account?',
+		]);
+	}
 
-		$this->addCsrfField();
+	public function initInputs() {
+		parent::initInputs();
 
-		$f = $this->addFieldset();
 		$this->addPassword(
 			[
 				'name'     => 'password',
 				'required' => 'required',
-				'autocomplete' => 'off',
+				'autocomplete' => 'current-password',
 			],
 			[
 				'label'     => 'Password',
-				'validator' => [$this, 'passwordValidator'],
-			],
-			$f
+				'validator' => function($value) {
+					$service = \Project\Service\Container::getInstance();
+					$user = $service->user->retrieve(['id' => $this->userId]);
+					if (empty($user)) return false;
+					return $service->user->passwordVerify($value, $user['password']);
+				},
+			]
 		);
-		$this->addButton('Delete account', [
-			'type'    => 'submit',
-			'onclick' => "return confirm('" . $this->_('Delete your account?') . "')",
-		], ['color' => 'danger', 'icon' => 'fas fa-trash-alt'], $f);
 	}
 
 	public function submitAction() {
 		try {
 			$this->validatePost();
-			$service = \Sy\Bootstrap\Service\Container::getInstance();
-			$user = $service->user->getCurrentUser();
-			$service->user->delete(['id' => $user->id]);
+			$service = \Project\Service\Container::getInstance();
+			$service->user->delete(['id' => $this->userId]);
 			$service->user->signOut();
-			$this->redirect(WEB_ROOT . '/');
+			return $this->jsonSuccess('Account deleted', ['redirection' => PROJECT_URL]);
 		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
-			$this->setError($this->_('An error occured'));
-			$this->fill($_POST);
+			return $this->jsonError('An error occured');
 		} catch (\Sy\Bootstrap\Service\User\Exception $e) {
 			$this->logWarning($e->getMessage());
-			$this->setError($this->_('An error occured'));
+			return $this->jsonError('An error occured');
 		}
-	}
-
-	public function passwordValidator($value) {
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
-		$user = $service->user->getCurrentUser();
-		return $service->user->passwordVerify($value, $user->password, $user->algo);
 	}
 
 }

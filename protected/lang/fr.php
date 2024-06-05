@@ -147,6 +147,7 @@ return [
 	'New password' => 'Nouveau mot de passe',
 	'Confirm new password' => 'Confirmez le nouveau mot de passe',
 	'Delete your account?' => 'Supprimer votre compte ?',
+	'Account deleted' => 'Compte supprimé',
 	'You are connected' => 'Connect&eacute; avec succ&egrave;s',
 	'Password error' => 'Mot de passe incorrect',
 	'Password too long' => 'Mot de passe trop long',

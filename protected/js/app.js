@@ -1,70 +1,91 @@
 (function() {
+
 	// Go to top button
-	$('#top-btn').on('transitionend', function() {
-		if ($(this).css('bottom') !== '-100px') return;
-		$(this).hide();
+	document.getElementById('top-btn').addEventListener('transitionend', function () {
+		if (this.style.bottom !== '-100px') return;
+		this.style.display = 'none';
 	});
 
 	function setScrollTop() {
 		var timer;
-		$(window).one('scroll.app', function() {
+		window.addEventListener('scroll', function onAppScroll() {
 			if (timer) {
 				window.clearTimeout(timer);
 			}
-			timer = window.setTimeout(function() {
-				if (($(window).scrollTop() < 1000)) {
-					$('#top-btn').css('bottom', '-100px');
+			timer = window.setTimeout(function () {
+				var scrollTop = window.scrollY || document.documentElement.scrollTop;
+				var topBtn = document.getElementById('top-btn');
+				if (scrollTop < 1000) {
+					topBtn.style.bottom = '-100px';
 				} else {
-					$('#top-btn').show();
-					$('#top-btn').css('bottom', '10px');
+					topBtn.style.display = 'block';
+					topBtn.style.bottom = '10px';
 				}
 				setScrollTop();
 			}, 500);
+			window.removeEventListener('scroll', onAppScroll);
 		});
 	}
 	setScrollTop();
 
-	$('#top-btn').click(function(e) {
+	document.getElementById('top-btn').addEventListener('click', function (e) {
 		e.preventDefault();
-		window.scroll({top: 0, left: 0, behavior: 'smooth'});
+		window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 	});
 
 	// Autosize textarea
-	$('body').on('focus change', 'textarea', function(){
-		if ($(this).hasClass('cke_source')) return;
-		autosize(this);
-		autosize.update(this);
-	});
+	document.body.addEventListener('focus', updateTextareaSize, true);
+	document.body.addEventListener('change', updateTextareaSize, true);
+
+	function updateTextareaSize(event) {
+		var target = event.target;
+		if (target.tagName === 'TEXTAREA' && !target.classList.contains('cke_source')) {
+			autosize(target);
+			autosize.update(target);
+		}
+	}
 
 	// Tooltips
 	new bootstrap.Tooltip(document.body, {
 		selector: '[data-bs-title]'
 	});
 
-	$('body').on('click touchend', 'button[data-bs-title]:not(.copy-url)', function(e) {
-		var tooltip = bootstrap.Tooltip.getInstance(this);
-		tooltip.dispose();
-	});
+	document.body.addEventListener('click', disposeTooltip, true);
+	document.body.addEventListener('touchend', disposeTooltip, true);
+
+	function disposeTooltip(event) {
+		if (event.target.matches('button[data-bs-title]:not(.copy-url)')) {
+			var tooltip = bootstrap.Tooltip.getInstance(event.target);
+			if (tooltip) {
+				tooltip.dispose();
+			}
+		}
+	}
 
 	// Multi modal
-	$('.modal').on('hidden.bs.modal', function() {
-		if ($('.modal:visible').length > 0) {
-			$('body').addClass('modal-open');
-		}
+	document.querySelectorAll('.modal').forEach(function (modal) {
+		modal.addEventListener('hidden.bs.modal', function () {
+			if (document.querySelectorAll('.modal.show').length > 0) {
+				document.body.classList.add('modal-open');
+			}
+		});
 	});
 
 	// Datetime
-	$('body').on('feed-loaded', updateTime); // Update datetime when a feed is loaded
+	document.body.addEventListener('feed-loaded', updateTime); // Update datetime when a feed is loaded
 
 	setInterval(updateTime, 60000); // Update datetime every minute
 
 	function updateTime() {
-		$('[data-date]').each(function() {
-			if ($(this).data('date-format') !== undefined) {
-				$(this).text(luxon.DateTime.fromSeconds($(this).data('date')).toLocaleString($(this).data('date-format')));
+		document.querySelectorAll('[data-date]').forEach(function (element) {
+			var dateFormat = element.getAttribute('data-date-format');
+			var dateValue = element.getAttribute('data-date');
+			if (dateFormat !== null) {
+				element.textContent = luxon.DateTime.fromSeconds(parseInt(dateValue)).toLocaleString(dateFormat);
 			} else {
-				$(this).text(luxon.DateTime.fromSeconds($(this).data('date')).toRelative());
+				element.textContent = luxon.DateTime.fromSeconds(parseInt(dateValue)).toRelative();
 			}
 		});
 	}
+
 })();

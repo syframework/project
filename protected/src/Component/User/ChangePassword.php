@@ -4,40 +4,52 @@ namespace Project\Component\User;
 class ChangePassword extends \Sy\Bootstrap\Component\Form {
 
 	public function init() {
-		parent::init();
-
 		$this->addCsrfField();
 
 		$f = $this->addFieldset();
+
 		$this->addPassword(
 			[
-				'name'     => 'old_password',
-				'required' => 'required',
-				'autocomplete' => 'off',
+				'name'         => 'old_password',
+				'required'     => 'required',
+				'autocomplete' => 'current-password',
 			],
 			[
 				'label'     => 'Old password',
-				'validator' => [$this, 'oldPasswordValidator'],
+				'validator' => function($value, $element) {
+					$service = \Project\Service\Container::getInstance();
+					$user = $service->user->getCurrentUser();
+					if ($service->user->passwordVerify($value, $user->password)) {
+						return true;
+					}
+					$element->setError('Password error');
+					return false;
+				},
 			],
 			$f
 		);
+
 		$this->addPassword(
 			[
-				'name'     => 'new_password',
-				'required' => 'required',
+				'name'         => 'new_password',
+				'required'     => 'required',
 				'autocomplete' => 'new-password',
+				'minlength'    => 8,
+				'maxlength'    => 128,
 			],
 			[
 				'label'     => 'New password',
-				'validator' => [$this, 'passwordValidator'],
 			],
 			$f
 		);
+
 		$this->addPassword(
 			[
-				'name'     => 'new_password_bis',
-				'required' => 'required',
+				'name'         => 'new_password_bis',
+				'required'     => 'required',
 				'autocomplete' => 'new-password',
+				'minlength'    => 8,
+				'maxlength'    => 128,
 			],
 			[
 				'label' => 'Confirm new password',
@@ -51,47 +63,24 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 				},
 			]
 		);
-		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'fas fa-save']);
-	}
 
-	public function oldPasswordValidator($value, $element) {
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
-		$user = $service->user->getCurrentUser();
-		if ($service->user->passwordVerify($value, $user->password)) {
-			return true;
-		}
-		$element->setError('Password error');
-		return false;
-	}
-
-	public function passwordValidator($value, $element) {
-		if (strlen($value) > 40) {
-			$element->setError('Password too long');
-			return false;
-		}
-		if (strlen($value) < 6) {
-			$element->setError('Password too short');
-			return false;
-		}
-		return true;
+		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'save']);
 	}
 
 	public function submitAction() {
 		try {
 			$this->validatePost();
-			$service = \Sy\Bootstrap\Service\Container::getInstance();
+			$service = \Project\Service\Container::getInstance();
 			$user = $service->user->getCurrentUser();
-			$service->user->update(['id' => $user->id], ['password' => password_hash($this->post('new_password'), PASSWORD_DEFAULT), 'algo' => 'bcrypt']);
+			$service->user->update(['id' => $user->id], ['password' => password_hash($this->post('new_password'), PASSWORD_DEFAULT)]);
 			$service->user->signIn($user->email, $this->post('new_password'));
-			$this->setSuccess($this->_('Password changed successfully'));
+			return $this->jsonSuccess('Password changed successfully');
 		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
-			if (is_null($this->getOption('error'))) {
-				$this->setError($this->_('An error occured'));
-			}
+			return $this->jsonError($this->getOption('error') ?? 'Please fill the form correctly');
 		} catch (\Sy\Bootstrap\Service\User\Exception $e) {
 			$this->logWarning($e->getMessage());
-			$this->setError($this->_('An error occured'));
+			return $this->jsonError('An error occured');
 		}
 	}
 
