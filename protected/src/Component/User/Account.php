@@ -1,6 +1,8 @@
 <?php
 namespace Project\Component\User;
 
+use Sy\Bootstrap\Lib\Url;
+
 class Account extends \Sy\Bootstrap\Component\Form {
 
 	public function init() {
@@ -76,14 +78,22 @@ class Account extends \Sy\Bootstrap\Component\Form {
 			$this->validatePost();
 			$service = \Project\Service\Container::getInstance();
 			$user = $service->user->getCurrentUser();
+
+			$options = ['reset' => false];
+			if ($user->language !== $this->post('language')) {
+				$params = Url::convertToParams($_SERVER['REQUEST_URI']);
+				$url = Url::convertToUrl(['lang' => $this->post('language')] + $params);
+				$options['redirection'] = $url;
+			}
+
 			$service->user->update(['id' => $user->id], [
 				'firstname'   => $this->post('firstname'),
 				'lastname'    => $this->post('lastname'),
 				'description' => $this->post('description'),
 				'language'    => $this->post('language'),
 			]);
-			$service->lang->setLang($this->post('lang'));
-			return $this->jsonSuccess('Change saved');
+			$service->lang->setLang($this->post('language'));
+			return $this->jsonSuccess('Change saved', $options);
 		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
 			return $this->jsonError($this->getOption('error') ?? 'Please fill the form correctly');
