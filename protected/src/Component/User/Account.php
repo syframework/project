@@ -4,44 +4,42 @@ namespace Project\Component\User;
 class Account extends \Sy\Bootstrap\Component\Form {
 
 	public function init() {
-		parent::init();
-
 		$f = $this->addFieldset();
 
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
+		$service = \Project\Service\Container::getInstance();
 		$user = $service->user->getCurrentUser();
 
 		$this->addCsrfField();
 
 		// E-mail
 		$this->addTextInput([
-				'name'      => 'email',
-				'value'     => $user->email,
-				'required'  => 'required',
-				'maxlength' => 64,
-				'readonly'  => 'readonly',
-			], [
-				'label' => 'E-mail',
-			], $f);
+			'name'      => 'email',
+			'value'     => $user->email,
+			'required'  => 'required',
+			'maxlength' => 64,
+			'readonly'  => 'readonly',
+		], [
+			'label' => 'E-mail',
+		], $f);
 
 		// Firstname
 		$this->addTextInput([
-				'name'      => 'firstname',
-				'value'     => $user->firstname,
-				'required'  => 'required',
-				'maxlength' => 64,
-			], [
-				'label' => 'Firstname',
-			], $f);
+			'name'      => 'firstname',
+			'value'     => $user->firstname,
+			'required'  => 'required',
+			'maxlength' => 64,
+		], [
+			'label' => 'Firstname',
+		], $f);
 
 		// Lastname
 		$this->addTextInput([
-				'name'      => 'lastname',
-				'value'     => $user->lastname,
-				'maxlength' => 64,
-			], [
-				'label' => 'Lastname',
-			], $f);
+			'name'      => 'lastname',
+			'value'     => $user->lastname,
+			'maxlength' => 64,
+		], [
+			'label' => 'Lastname',
+		], $f);
 
 		// Description
 		$this->addTextarea([
@@ -70,13 +68,13 @@ class Account extends \Sy\Bootstrap\Component\Form {
 			],
 		], $f);
 
-		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'fas fa-save']);
+		$this->addButton('Save', ['type' => 'submit'], ['color' => 'primary', 'icon' => 'save']);
 	}
 
 	public function submitAction() {
 		try {
 			$this->validatePost();
-			$service = \Sy\Bootstrap\Service\Container::getInstance();
+			$service = \Project\Service\Container::getInstance();
 			$user = $service->user->getCurrentUser();
 			$service->user->update(['id' => $user->id], [
 				'firstname'   => $this->post('firstname'),
@@ -84,21 +82,17 @@ class Account extends \Sy\Bootstrap\Component\Form {
 				'description' => $this->post('description'),
 				'language'    => $this->post('language'),
 			]);
-			setcookie('sy_language', $this->post('language'), time() + 60 * 60 * 24 * 365, WEB_ROOT . '/');
-			$this->setSuccess($this->_('Change saved'));
+			$service->lang->setLang($this->post('lang'));
+			return $this->jsonSuccess('Change saved');
 		} catch (\Sy\Component\Html\Form\Exception $e) {
 			$this->logWarning($e);
-			if (is_null($this->getOption('error'))) {
-				$this->setError($this->_('Please fill the form correctly'));
-			}
-			$this->fill($_POST);
+			return $this->jsonError($this->getOption('error') ?? 'Please fill the form correctly');
 		} catch (\Sy\Db\MySql\DuplicateEntryException $e) {
 			$this->logWarning($e->getMessage());
-			$this->setError($this->_('User already exists'));
-			$this->fill($_POST);
+			return $this->jsonError('User already exists');
 		} catch (\Sy\Db\MySql\Exception $e) {
 			$this->logWarning($e->getMessage());
-			$this->setError($this->_('An error occured'));
+			return $this->jsonError('An error occured');
 		}
 	}
 

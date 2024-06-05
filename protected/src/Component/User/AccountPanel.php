@@ -5,12 +5,11 @@ class AccountPanel extends \Sy\Component\Html\Panel {
 
 	public function __construct() {
 		parent::__construct();
-		$this->addTranslator(LANG_DIR);
-		$this->actionDispatch('s', 'index');
+		$this->mount(fn () => $this->actionDispatch('s', 'index'));
 	}
 
 	public function indexAction() {
-		$service = \Sy\Bootstrap\Service\Container::getInstance();
+		$service = \Project\Service\Container::getInstance();
 		$email = $service->user->getCurrentUser()->email;
 		$this->setComponent('NORTH', new \Sy\Bootstrap\Component\Form\Avatar(
 			\Sy\Bootstrap\Lib\Url::avatar($email),
@@ -25,7 +24,9 @@ class AccountPanel extends \Sy\Component\Html\Panel {
 	}
 
 	public function deleteAction() {
-		$this->setComponent('CENTER', new DeleteAccount());
+		$service = \Project\Service\Container::getInstance();
+		$id = $service->user->getCurrentUser()->id;
+		$this->setComponent('CENTER', new DeleteAccount($id));
 	}
 
 }
