@@ -34,19 +34,13 @@ function jsUglify() {
 		.pipe(gulp.dest('assets/js'));
 }
 
-// Concat plugin scss: protected/scss/_bootstrap-*.scss -> protected/scss/_plugin.scss
-function cssPluginConcat() {
-	return gulp.src('protected/scss/_bootstrap-*.scss')
-		.pipe(concat('_plugin.scss'))
-		.pipe(gulp.dest('protected/scss'));
-}
-
-// Transpile & minify: protected/scss/app.scss -> assets/css/app.css
+// Transpile & minify: sy/bootstrap scss + sy/bootstrap plugins scss + protected/scss/app.scss -> assets/css/app.css
 function cssAppTranspile() {
-	return gulp.src('protected/scss/app.scss')
+	return gulp.src(['protected/vendor/sy/bootstrap/scss/*.scss', 'protected/vendor/sy/bootstrap-*/scss/*.scss', 'protected/scss/app.scss'])
 		.pipe(sourcemaps.init())
-		.pipe(sass.sync({outputStyle: 'compressed'}))
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(postcss([autoprefixer()]))
+		.pipe(concat('app.css'))
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('assets/css'));
 }
@@ -54,7 +48,7 @@ function cssAppTranspile() {
 // Transpile & minify: protected/templates/**/*.scss -> protected/templates/**/*.css
 function cssTplTranspile() {
 	return gulp.src('protected/templates/**/*.scss')
-		.pipe(sass({outputStyle: 'compressed'}))
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(postcss([autoprefixer()]))
 		.pipe(gulp.dest('protected/templates'));
 }
@@ -62,7 +56,7 @@ function cssTplTranspile() {
 // Transpile & minify: protected/src/**/*.scss -> protected/src/**/*.css
 function cssSrcTranspile() {
 	return gulp.src('protected/src/**/*.scss')
-		.pipe(sass({outputStyle: 'compressed'}))
+		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(postcss([autoprefixer()]))
 		.pipe(gulp.dest('protected/src'));
 }
@@ -101,13 +95,13 @@ function watch() {
 }
 
 // Public tasks
-exports.css   = gulp.series(cssPluginConcat, gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile));
+exports.css   = gulp.parallel(cssAppTranspile, cssTplTranspile, cssSrcTranspile);
 exports.js    = jsConcat;
 exports.svg   = svgCompile;
 exports.watch = watch;
 
 // Build task
-exports.build = gulp.series(cssPluginConcat, gulp.parallel(svgCompile, cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify)));
+exports.build = gulp.parallel(svgCompile, cssAppTranspile, cssTplTranspile, cssSrcTranspile, gulp.series(jsConcat, jsUglify));
 
 // Default Task
 exports.default = gulp.series(gulp.parallel(svgCompile, cssAppTranspile, cssTplTranspile, cssSrcTranspile, jsConcat), watch);
