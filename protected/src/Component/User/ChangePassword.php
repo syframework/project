@@ -38,7 +38,7 @@ class ChangePassword extends \Sy\Bootstrap\Component\Form {
 				'maxlength'    => 128,
 			],
 			[
-				'label'     => 'New password',
+				'label' => 'New password',
 			],
 			$f
 		);
