@@ -3,7 +3,6 @@
 	// Go to top button
 	document.getElementById('top-btn').addEventListener('transitionend', function () {
 		if (this.style.bottom !== '-100px') return;
-		this.style.display = 'none';
 	});
 
 	function setScrollTop() {
@@ -18,7 +17,6 @@
 				if (scrollTop < 1000) {
 					topBtn.style.bottom = '-100px';
 				} else {
-					topBtn.style.display = 'block';
 					topBtn.style.bottom = '10px';
 				}
 				setScrollTop();
