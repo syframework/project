@@ -11,24 +11,20 @@
 		"Android >= 4.4",
 		"Opera >= 30"
 	],
-	"overrides": {
-		"glob-parent": "^6.0.0",
-		"chokidar": "^3.5.3"
-	},
 	"devDependencies": {
-		"autoprefixer": "^9.8.6",
-		"autosize": "^4.0.2",
-		"bootstrap": "^5.2.0",
-		"bootswatch": "^5.2.0",
-		"gulp": "^4.0.2",
+		"autoprefixer": "^10.4.19",
+		"autosize": "^6.0.1",
+		"bootstrap": "^5.3.3",
+		"bootswatch": "^5.3.3",
+		"gulp": "^5.0.0",
 		"gulp-concat": "^2.6.1",
-		"gulp-postcss": "^8.0.0",
+		"gulp-postcss": "^10.0.0",
 		"gulp-sass": "^5.1.0",
-		"gulp-sourcemaps": "^2.6.5",
+		"gulp-sourcemaps": "^^2.6.5",
 		"gulp-svg-sprite": "^2.0.3",
 		"gulp-uglify": "^3.0.2",
-		"luxon": "^3.3.0",
-		"sass": "^1.54.8",
+		"luxon": "^3.4.4",
+		"sass": "^1.77.5",
 		"smoothscroll-polyfill": "^0.4.4"
 	}
 }
