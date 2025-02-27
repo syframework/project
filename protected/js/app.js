@@ -45,20 +45,9 @@
 
 	// Tooltips
 	new bootstrap.Tooltip(document.body, {
-		selector: '[data-bs-title]'
+		selector: '[data-bs-title]',
+		trigger: 'hover',
 	});
-
-	document.body.addEventListener('click', disposeTooltip, true);
-	document.body.addEventListener('touchend', disposeTooltip, true);
-
-	function disposeTooltip(event) {
-		if (event.target.matches('button[data-bs-title]:not(.copy-url)')) {
-			var tooltip = bootstrap.Tooltip.getInstance(event.target);
-			if (tooltip) {
-				tooltip.dispose();
-			}
-		}
-	}
 
 	// Multi modal
 	document.querySelectorAll('.modal').forEach(function (modal) {
