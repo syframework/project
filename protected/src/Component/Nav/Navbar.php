@@ -3,6 +3,7 @@ namespace Project\Component\Nav;
 
 use Sy\Bootstrap\Lib\Url;
 use Sy\Bootstrap\Component\Icon;
+use Sy\Component\Html\Element;
 
 class Navbar extends \Sy\Component\WebComponent {
 
@@ -54,8 +55,10 @@ class Navbar extends \Sy\Component\WebComponent {
 			];
 
 			$name = htmlentities(trim($user->firstname . ' ' . $user->lastname), ENT_QUOTES, 'UTF-8');
+			$avatar = new Element('img', attributes: ['class' => 'rounded-circle', 'src' => Url::avatar($user->email), 'alt' => "Avatar: $name"]);
 			$data = [
-				'<img class="rounded-circle" src="' . Url::avatar($user->email) . '" alt="' . $name . '" /> ' . $name => [
+				$name => [
+					'icon' => $avatar,
 					'page' => 'user',
 					'param' => ['id' => $user->id],
 					'class' => 'dropdown-menu-end',
