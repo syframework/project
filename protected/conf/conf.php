@@ -100,9 +100,10 @@ define('JQUERY_UI_JS'         , ['url' => 'https://code.jquery.com/ui/1.12.1/jqu
 define('JQUERY_UI_TOUCH_JS'   , 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js');
 define('STICKYFILL_JS'        , 'https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js');
 define('INSTAFEED_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js');
-define('INTLTELINPUT_JS'      , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/intlTelInput.min.js');
-define('INTLTELINPUT_UTILS_JS', 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/js/utils.min.js');
-define('INTLTELINPUT_CSS'     , 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.15/css/intlTelInput.css');
+define('INTLTELINPUT_JS'      , 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/intlTelInput.min.js');
+define('INTLTELINPUT_UTILS_JS', 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js');
+define('INTLTELINPUT_CSS'     , 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/css/intlTelInput.min.css');
+define('INTLTELINPUT_TOP_COUNTRIES', ['fr', 'es', 'it', 'us', 'gb']);
 define('MAILCHECK_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js');
 define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js');
 define('PRINT_JS'             , 'https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js');
