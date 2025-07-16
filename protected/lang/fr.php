@@ -51,7 +51,7 @@ return [
 	'Privacy policy' => 'Politique de confidentialit&eacute;',
 
 	// Cookie consent
-	'Cookie consent message' => "En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour vous proposer des publicit&eacute;s cibl&eacute;es adapt&eacute;es &agrave; vos centres d’int&eacute;r&ecirc;ts et r&eacute;aliser des statistiques de visites.",
+	'Cookie consent message' => "En poursuivant votre navigation sur ce site, vous acceptez l'utilisation de cookies pour vous proposer des publicit&eacute;s cibl&eacute;es adapt&eacute;es &agrave; vos centres d’int&eacute;r&ecirc;ts et r&eacute;aliser des statistiques de visites.",
 	'Cookie consent dismiss' => "J'ai compris !",
 	'Cookie consent link' => 'En savoir plus',
 
@@ -73,8 +73,6 @@ return [
 	'Maximun size' => 'Taille maximale',
 	'Mb' => 'Mo',
 	'Unauthorized character in the id' => "Caract&egrave;res non autoris&eacute; dans l'id",
-	'Unauthorized character in the alias' => "Caract&egrave;res non autoris&eacute; dans l'alias",
-	'Alias already exists' => 'Cet alias existe d&eacute;j&agrave;',
 	'Message from' => 'Message de',
 	'Message sent' => 'Message envoy&eacute;',
 	'Message not sent' => 'Message non envoy&eacute;',
