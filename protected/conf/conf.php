@@ -93,21 +93,12 @@ define('LANGS', ['fr' => 'Fran&ccedil;ais', 'en' => 'English']);
 define('SALT', PROJECT);
 
 // CDN urls
-define('CKEDITOR_JS'          , 'https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js');
-define('CKEDITOR_ROOT'        , WEB_ROOT . '/assets/ckeditor');
-define('MOMENT_JS'            , 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js');
-define('JQUERY_UI_JS'         , ['url' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', 'integrity' => 'sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=']);
-define('JQUERY_UI_TOUCH_JS'   , 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js');
-define('STICKYFILL_JS'        , 'https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js');
-define('INSTAFEED_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/instafeed.js/1.4.1/instafeed.min.js');
 define('INTLTELINPUT_JS'      , 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/intlTelInput.min.js');
 define('INTLTELINPUT_UTILS_JS', 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js');
 define('INTLTELINPUT_CSS'     , 'https://cdn.jsdelivr.net/npm/intl-tel-input/build/css/intlTelInput.min.css');
 define('INTLTELINPUT_TOP_COUNTRIES', ['fr', 'es', 'it', 'us', 'gb']);
 define('MAILCHECK_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/mailcheck/1.1.2/mailcheck.min.js');
 define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js');
-define('PRINT_JS'             , 'https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js');
-define('SLIP_JS'              , 'https://cdnjs.cloudflare.com/ajax/libs/slipjs/2.1.1/slip.min.js');
 define('CROPPER_JS'           , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js');
 define('CROPPER_CSS'          , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css');
 
