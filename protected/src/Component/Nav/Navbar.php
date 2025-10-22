@@ -18,23 +18,23 @@ class Navbar extends \Sy\Component\WebComponent {
 		$this->addTranslator(LANG_DIR);
 		$this->setTemplateFile(TPL_DIR . '/Component/Nav/Navbar.html');
 		$this->setVars([
-			'WEB_ROOT' => WEB_ROOT,
-			'PROJECT'  => PROJECT,
+			'WEB_ROOT'         => WEB_ROOT,
+			'PROJECT'          => PROJECT,
 			'USER_CONNECT_URL' => Url::build('page', 'user-connection'),
+			'NAV'              => $this->menu(),
+			'NAV_RIGHT'        => $this->menuRight(),
 		]);
-		$this->setComponent('NAV', $this->menu());
-		$this->setComponent('NAV_RIGHT', $this->menuRight());
 	}
 
 	private function menu() {
 		$data = [
-			'Home'     => ['icon' => new Icon('home'), 'page' => 'home'],
+			'Home'  => ['icon' => new Icon('home'), 'page' => 'home'],
 			'About' => [
 				'icon' => new Icon('question-circle'),
 				'menu' => [
-					'About us' => ['icon' => new Icon('users'), 'page' => 'about-us'],
+					'About us'          => ['icon' => new Icon('users'), 'page' => 'about-us'],
 					'Conditions of use' => ['icon' => new Icon('info-circle'), 'page' => 'use'],
-					'Privacy policy' => ['icon' => new Icon('user-shield'), 'page' => 'privacy'],
+					'Privacy policy'    => ['icon' => new Icon('user-shield'), 'page' => 'privacy'],
 				],
 			],
 		];
