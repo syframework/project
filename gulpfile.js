@@ -34,9 +34,9 @@ function jsUglify() {
 		.pipe(gulp.dest('assets/js'));
 }
 
-// Transpile & minify: sy/bootstrap scss + sy/bootstrap plugins scss + protected/scss/app.scss -> assets/css/app.css
+// Transpile & minify: protected/scss/app.scss + sy/bootstrap scss + sy/bootstrap plugins scss -> assets/css/app.css
 function cssAppTranspile() {
-	return gulp.src(['protected/vendor/sy/bootstrap/scss/*.scss', 'protected/vendor/sy/bootstrap-*/scss/*.scss', 'protected/scss/app.scss'])
+	return gulp.src(['protected/scss/app.scss', 'protected/vendor/sy/bootstrap/scss/*.scss', 'protected/vendor/sy/bootstrap-*/scss/*.scss'])
 		.pipe(sourcemaps.init())
 		.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
 		.pipe(postcss([autoprefixer()]))
