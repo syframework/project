@@ -3,7 +3,8 @@
 	"description": "Project template",
 	"type": "project",
 	"require": {
-		"sy/bootstrap": "*"
+		"php": ">=8.0",
+		"sy/bootstrap": "^1.0"
 	},
 	"license": "MIT",
 	"authors": [
