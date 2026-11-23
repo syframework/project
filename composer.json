@@ -30,10 +30,11 @@
 		"sy/flyway": "*"
 	},
 	"scripts": {
-		"post-create-project-cmd": "@install-project",
+		"post-create-project-cmd": "@install-project-first",
 		"post-install-cmd": "@install-project-first",
 		"post-update-cmd": [
-			"Sy\\Bootstrap\\Plugin::dbMigrateIfConfigured"
+			"Sy\\Bootstrap\\Plugin::dbMigrateIfConfigured",
+			"@install-project-first"
 		],
 		"post-package-install": [
 			"Sy\\Bootstrap\\Plugin::postPackageInstall"
