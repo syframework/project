@@ -3,8 +3,8 @@
 	"description": "Project template",
 	"type": "project",
 	"require": {
-		"php": ">=8.0",
-		"sy/bootstrap": "^1.0"
+		"php": ">=8.1",
+		"sy/bootstrap": "^1.20"
 	},
 	"license": "MIT",
 	"authors": [
@@ -31,8 +31,10 @@
 	},
 	"scripts": {
 		"post-create-project-cmd": "@install-project",
-		"post-install-cmd": "@install-project",
-		"post-update-cmd": "@install-project",
+		"post-install-cmd": "@install-project-first",
+		"post-update-cmd": [
+			"Sy\\Bootstrap\\Plugin::dbMigrateIfConfigured"
+		],
 		"post-package-install": [
 			"Sy\\Bootstrap\\Plugin::postPackageInstall"
 		],
@@ -47,6 +49,9 @@
 			"@db migrate",
 			"sudo chmod -R a+w ."
 		],
+		"install-project-first": [
+			"Sy\\Bootstrap\\Plugin::installProjectFirst"
+		],
 		"install-plugin": [
 			"Sy\\Bootstrap\\Plugin::install"
 		],
@@ -60,6 +65,7 @@
 	},
 	"scripts-descriptions": {
 		"install-project": "Full project installation",
+		"install-project-first": "Full project installation, only when the project is not configured yet (post-install-cmd)",
 		"install-plugin": "Plugin installation: composer install-plugin [REQUIRED PLUGIN NAME] [OPTIONAL VERSION NUMBER] (Plugin name: article, cms, message, location, link etc...)",
 		"build": "Compile and build all CSS and JS assets",
 		"db": "Run Flyway: composer db [migrate|info|repair|clean|validate|baseline]",
