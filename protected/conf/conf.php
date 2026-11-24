@@ -102,6 +102,12 @@ define('CLIPBOARD_JS'         , 'https://cdnjs.cloudflare.com/ajax/libs/clipboar
 define('CROPPER_JS'           , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js');
 define('CROPPER_CSS'          , 'https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css');
 
+// WYSIWYG server-side components allowed in rendered content, per editor.
+// Example:
+// define('WYSIWYG_COMPONENT_ALLOWLIST', [
+// 	'article' => [\Project\Component\Article\Map::class],
+// ]);
+
 // You can use these slot names (prefixed by underscore) in your templates, they are set in Sy\Bootstrap\Application\Page\Body
 define('MAGIC_VARS', [
 	'_PROJECT'         => PROJECT,
