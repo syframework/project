@@ -4,7 +4,7 @@
 	"type": "project",
 	"require": {
 		"php": ">=8.1",
-		"sy/bootstrap": "^1.20"
+		"sy/bootstrap": "^1.20.2"
 	},
 	"license": "MIT",
 	"authors": [
@@ -30,17 +30,18 @@
 		"sy/flyway": "*"
 	},
 	"scripts": {
-		"post-create-project-cmd": "@install-project-first",
-		"post-install-cmd": "@install-project-first",
+		"post-create-project-cmd": [
+			"@install-project-first",
+			"Project\\Composer\\Installer::postPackages"
+		],
+		"post-install-cmd": [
+			"@install-project-first",
+			"Project\\Composer\\Installer::postPackages"
+		],
 		"post-update-cmd": [
 			"Sy\\Bootstrap\\Plugin::dbMigrateIfConfigured",
-			"@install-project-first"
-		],
-		"post-package-install": [
-			"Sy\\Bootstrap\\Plugin::postPackageInstall"
-		],
-		"post-package-update": [
-			"Sy\\Bootstrap\\Plugin::postPackageUpdate"
+			"@install-project-first",
+			"Project\\Composer\\Installer::postPackages"
 		],
 		"install-project": [
 			"protected/vendor/bin/genini '{\"file\":\"protected\/conf\/database.ini\",\"input\":{\"host\":{\"question\":\"MySQL hostname\"},\"port\":{\"question\":\"MySQL port\",\"default\":\"3306\"},\"dbname\":{\"question\":\"Database name\"},\"username\":{\"question\":\"Database username\"},\"password\":{\"question\":\"Database password\"},\"charset\":{\"question\":\"Charset\",\"default\":\"utf8mb4\"}}}'",
