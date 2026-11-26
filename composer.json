@@ -4,7 +4,7 @@
 	"type": "project",
 	"require": {
 		"php": ">=8.1",
-		"sy/bootstrap": "^2.1.4"
+		"sy/bootstrap": "^2.1.5"
 	},
 	"license": "MIT",
 	"authors": [
@@ -32,16 +32,16 @@
 	"scripts": {
 		"post-create-project-cmd": [
 			"@install-project-first",
-			"Project\\Composer\\Installer::postPackages"
+			"Sy\\Bootstrap\\Plugin::installPlugins"
 		],
 		"post-install-cmd": [
 			"@install-project-first",
-			"Project\\Composer\\Installer::postPackages"
+			"Sy\\Bootstrap\\Plugin::installPlugins"
 		],
 		"post-update-cmd": [
 			"Sy\\Bootstrap\\Plugin::dbMigrateIfConfigured",
 			"@install-project-first",
-			"Project\\Composer\\Installer::postPackages"
+			"Sy\\Bootstrap\\Plugin::installPlugins"
 		],
 		"install-project": [
 			"protected/vendor/bin/genini '{\"file\":\"protected\/conf\/database.ini\",\"input\":{\"host\":{\"question\":\"MySQL hostname\"},\"port\":{\"question\":\"MySQL port\",\"default\":\"3306\"},\"dbname\":{\"question\":\"Database name\"},\"username\":{\"question\":\"Database username\"},\"password\":{\"question\":\"Database password\"},\"charset\":{\"question\":\"Charset\",\"default\":\"utf8mb4\"}}}'",
