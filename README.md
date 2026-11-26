@@ -34,14 +34,25 @@ whatever the entry point. Note that `composer install` behaves like
 project created from this template — and triggers `post-update-cmd`. The guard
 makes that harmless.
 
-Plugin installation steps are conditional:
+Plugin installation steps run from two entry points: the per-package events
+(`post-package-install` / `-update`) for the plugin that just changed, and
+`Sy\Bootstrap\Plugin::installPlugins()` on `post-create-project-cmd`,
+`post-install-cmd` and `post-update-cmd`, which scans every installed plugin.
+The scan exists because the per-package events cannot run on a first install:
+Composer fires them before it dumps the autoloader.
 
-- `templates/` and `assets/` are copied on install, `assets/` only on update;
+Both entry points apply the same rules:
+
+- `assets/` are copied, or refreshed when the vendor copy is newer;
+- `templates/` are copied only when the file is missing: once copied, a
+  template belongs to the project and is never overwritten;
 - the Sass build runs only when the plugin ships `scss/` (or a `.scss` file
-  under `templates/`);
-- the migrations run only when the plugin ships `sql/`;
-- plugin `templates/` are never overwritten on update: once copied, they belong
-  to the project.
+  under `templates/`), and the scan skips it when `assets/css/app.css` is
+  already newer than every plugin SCSS file;
+- the migrations run only when the plugin ships `sql/`.
+
+The scan is idempotent: an update that changes nothing copies nothing and
+starts no Docker build.
 
 ## Create configuration files
 
