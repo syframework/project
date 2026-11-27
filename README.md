@@ -38,7 +38,8 @@ remembered in a state file — every decision is derived from the filesystem.
 | `composer update` | Updates the dependencies, then `sy install`. |
 | `composer require sy/bootstrap-<plugin>` | Installs the plugin, then `sy install` runs through `post-update-cmd`. |
 | `composer install-plugin <plugin> [version]` | Shorthand for `composer require sy/bootstrap-<plugin>[:version]`. |
-| `composer sy <verb>` | Any installer verb directly: `install`, `sync`, `build`, `db`, `doctor`. |
+| `composer sy <verb>` | Any installer verb directly: `install`, `plan`, `sync`, `build`, `db`, `doctor`. |
+| `composer sy plan` | The full install pass without executing anything: prints every command it would run. |
 | `protected/vendor/bin/sy <verb>` | The same installer, without Composer: flags are not intercepted, which is what a deploy script needs. |
 | `composer db [task]` | Flyway on the core schema and on every plugin schema. `migrate` by default; `info`, `repair`, `clean`, `validate` and `baseline` are accepted. |
 | `composer build` | Rebuilds the CSS and JS assets on demand. |
@@ -46,18 +47,19 @@ remembered in a state file — every decision is derived from the filesystem.
 | `composer chown` | Gives the current user back the files created as root by the Docker build (WSL). |
 | `composer format`, `composer check` | PHP_CodeSniffer fixer and checker. |
 
-Composer consumes the arguments starting with `--` placed after a script name,
-so a flag needs the `--` separator:
+The installer modifiers are **positional**, so Composer forwards them:
+`composer sy install quiet` works, while `composer sy install --quiet` would see
+Composer consume the flag — and `composer sy install --dry-run` would silently
+run a real install. Use the `plan` verb for a dry run, and the positional
+modifiers `quiet`, `no-build`, `no-db`, `no-templates`:
 
 ```bash
-composer sy -- install --dry-run      # runs sy install --dry-run
-composer db info                      # positional arguments need no separator
-protected/vendor/bin/sy install --dry-run   # script or CI: the binary, directly
+composer sy plan                          # what would install do, without doing it
+composer sy install quiet                 # no output, for a script
+composer sy install no-build no-db        # files only
+composer db info                          # positional task, no separator needed
+protected/vendor/bin/sy install --dry-run # direct call: flags are kept as-is
 ```
-
-Without the separator, `composer sy install --dry-run` silently runs a **real**
-install: the flag never reaches the installer. The install is idempotent, so it
-is harmless, but the `--dry-run` plan you expected is not printed.
 
 ## Configuration
 
