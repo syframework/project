@@ -16,47 +16,90 @@ composer create-project sy/project [DIRECTORY]
 
 ## Composer scripts
 
-The installer is wired to Composer events. `protected/conf/database.ini` is the
-marker: while it is missing, the project is considered not installed yet.
+The project lifecycle is one command, wired to the three Composer events that
+can happen on an install or an update:
+
+```json
+"post-create-project-cmd": ["@sy install"],
+"post-install-cmd": ["@sy install"],
+"post-update-cmd": ["@sy install"]
+```
+
+`vendor/bin/sy` is shipped by `sy/bootstrap`. `sy install` is idempotent: every
+configuration file that is missing is generated, the plugin files are copied
+when absent and refreshed when their vendor copy is newer, and the Sass build
+and the migrations run only when they are actually needed. Nothing is
+remembered in a state file — every decision is derived from the filesystem.
 
 | Command | Effect |
 |---|---|
-| `composer create-project sy/project [DIRECTORY]` | Installs the dependencies, then runs the full installation once: prompts for `database.ini` and `smtp.ini`, builds assets, migrates the database. |
-| `composer install` | Installs the dependencies. Runs the full installation when `database.ini` is missing, nothing otherwise. |
-| `composer update` | Updates the dependencies. Migrates a configured project (`composer db migrate`); installs a project that is not configured yet. |
-| `composer require sy/bootstrap-<plugin>` | Installs the plugin, then runs its installation steps. |
+| `composer create-project sy/project [DIRECTORY]` | Installs the dependencies, then runs `sy install`: asks for the missing INI files, builds the assets, migrates the database. |
+| `composer install` | Installs the dependencies, then `sy install`. |
+| `composer update` | Updates the dependencies, then `sy install`. |
+| `composer require sy/bootstrap-<plugin>` | Installs the plugin, then `sy install` runs through `post-update-cmd`. |
 | `composer install-plugin <plugin> [version]` | Shorthand for `composer require sy/bootstrap-<plugin>[:version]`. |
+| `composer sy <verb>` | Any installer verb directly: `install`, `sync`, `build`, `db`, `doctor`. |
+| `composer db [task]` | Flyway on the core schema and on every plugin schema. `migrate` by default; `info`, `repair`, `clean`, `validate` and `baseline` are accepted. |
 | `composer build` | Rebuilds the CSS and JS assets on demand. |
+| `composer doctor` | Exits non zero when a plugin file, `assets/css/app.css` or a configuration file is missing. |
+| `composer chown` | Gives the current user back the files created as root by the Docker build (WSL). |
+| `composer format`, `composer check` | PHP_CodeSniffer fixer and checker. |
 
-The installation script is guarded by `database.ini`, so it runs at most once,
-whatever the entry point. Note that `composer install` behaves like
-`composer update` when there is no `composer.lock` — which is gitignored in a
-project created from this template — and triggers `post-update-cmd`. The guard
-makes that harmless.
+Composer swallows the flags placed after a script name, so pass them through
+the installer itself: `composer sy install --dry-run`, or
+`protected/vendor/bin/sy install --dry-run`.
 
-Plugin installation steps run from two entry points: the per-package events
-(`post-package-install` / `-update`) for the plugin that just changed, and
-`Sy\Bootstrap\Plugin::installPlugins()` on `post-create-project-cmd`,
-`post-install-cmd` and `post-update-cmd`, which scans every installed plugin.
-The scan exists because the per-package events cannot run on a first install:
-Composer fires them before it dumps the autoloader.
+## Configuration
 
-Both entry points apply the same rules:
+Everything lives in `composer.json`, under `extra.sy`:
+
+```json
+"extra": {
+	"sy": {
+		"build": "docker run --pull always --rm -v \"$PWD\":/syproject -w /syproject node:slim gulp build",
+		"ini": {
+			"database": { "file": "protected/conf/database.ini", "input": { "host": { "question": "MySQL hostname" } } },
+			"smtp": { "file": "protected/conf/smtp.ini", "input": { "host": { "question": "SMTP hostname" } } }
+		},
+		"install": ["php protected/bin/seed.php"]
+	}
+}
+```
+
+- `build` is the shell command compiling the project assets; it runs in the
+  project root and only when a plugin SCSS file is newer than
+  `assets/css/app.css`;
+- `ini` lists the configuration files `genini` generates when they are missing,
+  with the questions asked to the developer;
+- `install` lists the shell commands run once, just after the INI generation, so
+  a later `sy install` does nothing.
+
+Add an entry to `ini` for a project-specific file, and a command to `install`
+for anything `genini` cannot express.
+
+## Plugin files
+
+`sy install` applies the same rules to every installed plugin
+(`vendor/sy/bootstrap-*`):
 
 - `assets/` are copied, or refreshed when the vendor copy is newer;
 - `templates/` are copied only when the file is missing: once copied, a
   template belongs to the project and is never overwritten;
-- the Sass build runs only when the plugin ships `scss/` (or a `.scss` file
-  under `templates/`), and the scan skips it when `assets/css/app.css` is
-  already newer than every plugin SCSS file;
-- the migrations run only when the plugin ships `sql/`.
+- the Sass build runs only when a plugin ships `scss/` (or a `.scss` file under
+  `templates/`), and only when `assets/css/app.css` is older than every plugin
+  SCSS file;
+- the migrations run per plugin schema, each with its own
+  `flyway_<plugin>_history` table.
 
-The scan is idempotent: an update that changes nothing copies nothing and
-starts no Docker build.
+`composer doctor` is the cheapest way to check a deployment: it exits non zero
+when a plugin asset is missing from the project, which is exactly the failure a
+`git clean` or a stale deploy produces.
 
 ## Create configuration files
 
-A command line interface will guide you for generating these configuration files when you create a new project.
+The installer guides you through these files: each entry of `extra.sy.ini` is
+asked for when the file is missing, on the first `composer install` (or
+`composer sy install`).
 
 Create the file [DOCUMENT ROOT]/protected/conf/database.ini
 
