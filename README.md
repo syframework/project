@@ -39,15 +39,25 @@ remembered in a state file — every decision is derived from the filesystem.
 | `composer require sy/bootstrap-<plugin>` | Installs the plugin, then `sy install` runs through `post-update-cmd`. |
 | `composer install-plugin <plugin> [version]` | Shorthand for `composer require sy/bootstrap-<plugin>[:version]`. |
 | `composer sy <verb>` | Any installer verb directly: `install`, `sync`, `build`, `db`, `doctor`. |
+| `protected/vendor/bin/sy <verb>` | The same installer, without Composer: flags are not intercepted, which is what a deploy script needs. |
 | `composer db [task]` | Flyway on the core schema and on every plugin schema. `migrate` by default; `info`, `repair`, `clean`, `validate` and `baseline` are accepted. |
 | `composer build` | Rebuilds the CSS and JS assets on demand. |
 | `composer doctor` | Exits non zero when a plugin file, `assets/css/app.css` or a configuration file is missing. |
 | `composer chown` | Gives the current user back the files created as root by the Docker build (WSL). |
 | `composer format`, `composer check` | PHP_CodeSniffer fixer and checker. |
 
-Composer swallows the flags placed after a script name, so pass them through
-the installer itself: `composer sy install --dry-run`, or
-`protected/vendor/bin/sy install --dry-run`.
+Composer consumes the arguments starting with `--` placed after a script name,
+so a flag needs the `--` separator:
+
+```bash
+composer sy -- install --dry-run      # runs sy install --dry-run
+composer db info                      # positional arguments need no separator
+protected/vendor/bin/sy install --dry-run   # script or CI: the binary, directly
+```
+
+Without the separator, `composer sy install --dry-run` silently runs a **real**
+install: the flag never reaches the installer. The install is idempotent, so it
+is harmless, but the `--dry-run` plan you expected is not printed.
 
 ## Configuration
 
