@@ -36,16 +36,25 @@ remembered in a state file — every decision is derived from the filesystem.
 | `composer create-project sy/project [DIRECTORY]` | Installs the dependencies, then runs `sy install`: asks for the missing INI files, builds the assets, migrates the database. |
 | `composer install` | Installs the dependencies, then `sy install`. |
 | `composer update` | Updates the dependencies, then `sy install`. |
-| `composer require sy/bootstrap-<plugin>` | Installs the plugin, then `sy install` runs through `post-update-cmd`. |
-| `composer install-plugin <plugin> [version]` | Shorthand for `composer require sy/bootstrap-<plugin>[:version]`. |
+| `composer require sy/bootstrap-<plugin>[:version]` | Installs the plugin, then `sy install` runs through `post-update-cmd`. |
 | `composer sy <verb>` | Any installer verb directly: `install`, `plan`, `sync`, `build`, `db`, `doctor`. |
 | `composer sy plan` | Abbreviation of `composer sy install dry-run`: prints every command instead of running it. |
 | `protected/vendor/bin/sy <verb>` | The same installer, without Composer: flags are not intercepted, which is what a deploy script needs. |
-| `composer db [task]` | Flyway on the core schema and on every plugin schema. `migrate` by default; `info`, `repair`, `clean`, `validate` and `baseline` are accepted. |
-| `composer build` | Rebuilds the CSS and JS assets on demand. |
-| `composer doctor` | Exits non zero when a plugin file, `assets/css/app.css` or a configuration file is missing. |
+| `composer sy db [task]` | Flyway on the core schema and on every plugin schema. `migrate` by default; `info`, `repair`, `clean`, `validate` and `baseline` are accepted. |
+| `composer sy build` | Rebuilds the CSS and JS assets on demand. |
+| `composer sy doctor` | Exits non zero when a plugin file, `assets/css/app.css` or a configuration file is missing. |
 | `composer chown` | Gives the current user back the files created as root by the Docker build (WSL). |
 | `composer format`, `composer check` | PHP_CodeSniffer fixer and checker. |
+
+### Migration from 7.x
+
+| 7.x command | 8.0.0 command |
+|---|---|
+| `composer install-project` | `composer sy install` |
+| `composer install-plugin <plugin> [version]` | `composer require sy/bootstrap-<plugin>[:version]` |
+| `composer db [task]` | `composer sy db [task]` |
+| `composer build` | `composer sy build` |
+| `composer doctor` | `composer sy doctor` |
 
 The installer modifiers are **positional** and apply to every verb: `dry-run`,
 `quiet`, `no-build`, `no-db`, `no-templates`. Composer would consume the `--`
@@ -58,7 +67,7 @@ composer sy db info dry-run               # same modifier, any verb
 composer sy install quiet                 # no output, exit code only
 composer sy plan                          # abbreviation of `install dry-run`
 composer sy install no-build no-db        # files only
-composer db info                          # positional task, no separator needed
+composer sy db info                       # positional task, no separator needed
 protected/vendor/bin/sy install --dry-run # direct call: flags are kept as-is
 ```
 
@@ -104,7 +113,7 @@ for anything `genini` cannot express.
 - the migrations run per plugin schema, each with its own
   `flyway_<plugin>_history` table.
 
-`composer doctor` is the cheapest way to check a deployment: it exits non zero
+`composer sy doctor` is the cheapest way to check a deployment: it exits non zero
 when a plugin asset is missing from the project, which is exactly the failure a
 `git clean` or a stale deploy produces.
 
@@ -143,7 +152,7 @@ When a new project is created, the database is created with this SQL script: ```
 
 We use [Flyway](https://flywaydb.org/) to manage database changes. Here is the composer custom command:
 ```
-composer db [FLYWAY COMMAND]
+composer sy db [task]
 ```
 
 Flyway commands:
@@ -156,14 +165,14 @@ Flyway commands:
 
 Example:
 ```
-composer db migrate
+composer sy db migrate
 ```
 
 ## Build CSS & JS
 
 We have a composer custom command for building CSS and JS assets:
 ```
-composer build
+composer sy build
 ```
 
 But it's recommended to install NodeJS and Gulp if you have to rebuild frequently the CSS or JS.

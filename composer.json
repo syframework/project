@@ -4,9 +4,7 @@
 	"type": "project",
 	"require": {
 		"php": ">=8.1",
-		"sy/bootstrap": "^2.2",
-		"sy/flyway": "*",
-		"sy/genini": "*"
+		"sy/bootstrap": "^2.2"
 	},
 	"license": "MIT",
 	"authors": [
@@ -27,7 +25,9 @@
 		}
 	},
 	"require-dev": {
-		"sy/coding-standard": "*"
+		"sy/coding-standard": "*",
+		"sy/flyway": "*",
+		"sy/genini": "*"
 	},
 	"scripts": {
 		"post-create-project-cmd": [
@@ -40,24 +40,12 @@
 			"@sy install"
 		],
 		"sy": "@php protected/vendor/bin/sy",
-		"db": "@sy db",
-		"build": "@sy build",
-		"doctor": "@sy doctor",
-		"install-project": "@sy install",
-		"install-plugin": [
-			"Sy\\Bootstrap\\Plugin::install"
-		],
 		"format": "protected/vendor/bin/phpcbf --colors --standard=protected/vendor/sy/coding-standard/ruleset.xml",
 		"check": "protected/vendor/bin/phpcs --colors --standard=protected/vendor/sy/coding-standard/ruleset.xml",
 		"chown": "sudo chown -R \"$USER\":\"$USER\" ."
 	},
 	"scripts-descriptions": {
-		"sy": "Framework installer: install, sync, build, db, doctor",
-		"db": "Run the database migrations: composer db [migrate|info|repair|clean|validate|baseline]",
-		"build": "Rebuild the CSS and JS assets",
-		"doctor": "Diagnose the project: missing plugin files, compiled CSS, database configuration",
-		"install-project": "Full project installation (alias of composer sy install)",
-		"install-plugin": "Plugin installation: composer install-plugin [PLUGIN NAME] [OPTIONAL VERSION]",
+		"sy": "Framework installer: composer sy <install|plan|sync|build|db|doctor>",
 		"format": "Format the PHP coding style: composer format [FILE OR DIRECTORY]",
 		"check": "Check the PHP coding style: composer check [FILE OR DIRECTORY]",
 		"chown": "Give the current user back the files created as root by the Docker build (WSL)"
